@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 
 class Error extends Component {
   render() {
-    return (
-      <p>Error</p>
-    );
+    return <p>Error</p>;
   }
 }
 

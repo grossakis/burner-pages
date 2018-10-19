@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class FullBox extends Component {
   render() {
@@ -9,10 +9,10 @@ class FullBox extends Component {
       <div
         className="col s12"
         style={{
-          border: "dashed 1px lightgray",
-          textAlign: "center",
+          border: 'dashed 1px lightgray',
+          textAlign: 'center',
           // height: "100px",
-          padding: "50px 0"
+          padding: '50px 0'
         }}
       >
         <button onClick={this.addElement}>+</button>

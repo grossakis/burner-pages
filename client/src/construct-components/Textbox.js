@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class Textbox extends Component {
   render() {
     return (
       <div
         style={{
-          textAlign: "left",
+          textAlign: 'left',
           color: this.props.textColor,
           size: this.props.textSize,
           font: this.props.textFont
