@@ -1,15 +1,16 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment } from "react";
 // import './Custom.css';
-import API from '../utils/API';
+
+import API from "../utils/API";
 
 class Search extends Component {
   state = {
     // breeds: [],
     // breed: "",
     // results: []
-    selectedUser: '',
+    selectedUser: "",
     foundUser: false,
-    headMessage: 'No Page Found'
+    headMessage: "No Page Found"
   };
 
   componentDidMount = () => {
@@ -22,7 +23,7 @@ class Search extends Component {
           this.setState({
             selectedUser: user.email,
             foundUser: true,
-            headMessage: 'Welcome to ' + user.email + "'s page"
+            headMessage: "Welcome to " + user.email + "'s page"
           });
         }
       });
