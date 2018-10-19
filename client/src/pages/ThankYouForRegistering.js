@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 
 class ThankYouForRegistering extends Component {
   render() {
-      return (
-        <p>Thank You for registering for butts.com</p>
-      );
+    return <p>Thank You for registering for butts.com</p>;
   }
 }
 

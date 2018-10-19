@@ -52,11 +52,7 @@ class Search extends Component {
     this.searchForBreed(this.state.breed);
   }*/
   render() {
-    return (
-      <div className="Search">
-        Search Page
-      </div>
-    );
+    return <div className="Search">Search Page</div>;
     /*const getResults = () => {
       console.log(this.state.results);
       return this.state.results.map(
