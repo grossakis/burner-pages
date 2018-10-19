@@ -8,15 +8,15 @@ class Signup extends Component {
     console.log(event.target.email.value);
     console.log(event.target.password.value);
     API.registerUser(event.target.email.value, event.target.password.value)
-    .then( response => {
-      console.log(response.data);
-      window.location = "/thank-you";
-    } )
-    .catch( error => {
-      console.log(error);
-    });
-    console.log("submitted");
-  }
+      .then(response => {
+        console.log(response.data);
+        window.location = '/thank-you';
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    console.log('submitted');
+  };
   render() {
     return (
       <div className="sign-up-wrapper">

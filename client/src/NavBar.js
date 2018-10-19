@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import { Link } from "react-router-dom";
+import React, { Component, Fragment } from 'react';
+import { Link } from 'react-router-dom';
 // import './Custom.css';
 
 class NavBar extends Component {
@@ -32,6 +32,11 @@ class NavBar extends Component {
             <li>
               <Link to="/search" className="navlink">
                 Search
+              </Link>
+            </li>
+            <li>
+              <Link to="/create" className="navlink">
+                Create
               </Link>
             </li>
           </ul>
