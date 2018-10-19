@@ -14,7 +14,11 @@ class PageConstructor extends Component {
   addElement = () => {
     this.setState({
       box1: {
-        status: "heading"
+        status: "heading",
+        content: "This is a Heading",
+        color: "",
+        size: "",
+        font: ""
       }
     });
   };
@@ -24,7 +28,14 @@ class PageConstructor extends Component {
     if (this.state.box1.status === "empty") {
       element1 = <FullBox addElement={this.addElement} />;
     } else if (this.state.box1.status === "heading") {
-      element1 = <Heading headingText={this.state.box1.status} />;
+      element1 = (
+        <Heading
+          headingColor={this.state.box1.color}
+          headingSize={this.state.box1.size}
+          headingFont={this.state.box1.font}
+          headingContent={this.state.box1.status}
+        />
+      );
     }
     return (
       <div className="container">
