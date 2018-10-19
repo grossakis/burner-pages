@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Heading extends Component {
   render() {
     return (
       <div
         style={{
-          textAlign: 'center',
+          textAlign: "center",
           color: this.props.headingColor,
           size: this.props.headingSize,
           font: this.props.headingFont
