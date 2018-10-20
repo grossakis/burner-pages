@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './Rover.scss';
 import Home from './pages/Home'; //???
 import About from './pages/About'; //???
-import Create from './pages/Create'; //???
+import Create from './construct-components/Create'; //???
 import Error from './pages/Error'; //???
 import SignUp from './pages/SignUp'; //???
 import Login from './pages/Login'; //???
@@ -13,7 +13,7 @@ import API from './utils/API'; //???
 import ThankYouForRegistering from './pages/ThankYouForRegistering';
 import PageConstructor from './pages/PageConstructor';
 import Userpage from './pages/Userpage';
-import NavBar from './NavBar';
+import OwnNavBar from './OwnNavBar';
 
 class App extends Component {
   state = {
@@ -37,7 +37,7 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
-          <NavBar email={this.state.email} />
+          <OwnNavBar email={this.state.email} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/about" component={About} />
