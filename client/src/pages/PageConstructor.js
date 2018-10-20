@@ -1,10 +1,10 @@
-import React, { Component, Fragment } from 'react';
-import { Input, Row, Col, Button, Container } from 'react-materialize';
+import React, { Component, Fragment } from "react";
+import { Input, Row, Col, Button, Container } from "react-materialize";
 // import './Custom.css';
-import NewRow from '../component-boxes/NewRow';
+import NewRow from "../component-boxes/NewRow";
 // import Menu from '../pages/Create';
-import Heading from '../construct-components/Heading';
-import API from '../utils/API';
+import Heading from "../construct-components/Heading";
+import API from "../utils/API";
 
 class PageConstructor extends Component {
   state = {
@@ -71,28 +71,73 @@ class PageConstructor extends Component {
   //   });
   // };
   addElement = x => {
-    console.log('------start--------');
+    console.log("------start--------");
     console.log(x);
     console.log(this.state.rows);
     let rows = this.state.rows;
     let lastElement = this.state.lastElement + 1;
     let rowComponents = rows[x].components;
     let newElement = {
-      status: 'heading',
-      content: 'This is a Heading',
-      color: '',
-      size: '',
-      font: ''
+      status: "heading",
+      content: "This is a Heading",
+      color: "",
+      size: "",
+      font: ""
     };
     rowComponents.push(newElement);
     this.setState({
       rows: rows,
       lastElement: lastElement
     });
-    console.log('final:');
+    console.log("final:");
     console.log(rows);
 
-    console.log('------end--------');
+    console.log("------end--------");
+  };
+
+  // addElement = x => {
+  //   let rows = this.state.rows;
+  //   let rowComponents = this.state.rows[x].components;
+  //   // let rows = this.state.rows;
+  //   let newElement = {
+  //     status: "heading",
+  //     content: "This is a Heading",
+  //     color: "",
+  //     size: "",
+  //     font: ""
+  //   };
+  //   rowComponents.push(newElement);
+  //   rows.push(rowComponents);
+  //   // currentRow.push(newElement);
+
+  //   this.setState({
+  //     // test: "test"
+  //     rows: rows
+  //   });
+  // };
+  addElement = x => {
+    console.log("------start--------");
+    console.log(x);
+    console.log(this.state.rows);
+    let rows = this.state.rows;
+    let lastElement = this.state.lastElement + 1;
+    let rowComponents = rows[x].components;
+    let newElement = {
+      status: "heading",
+      content: "This is a Heading",
+      color: "",
+      size: "",
+      font: ""
+    };
+    rowComponents.push(newElement);
+    this.setState({
+      rows: rows,
+      lastElement: lastElement
+    });
+    console.log("final:");
+    console.log(rows);
+
+    console.log("------end--------");
   };
 
   render() {
@@ -139,7 +184,7 @@ class PageConstructor extends Component {
             );
           }
         })}
-        <Row style={{ textAlign: 'center' }}>
+        <Row style={{ textAlign: "center" }}>
           <Button onClick={this.addRow}>new row</Button>
         </Row>
       </Container>

@@ -1,15 +1,15 @@
-import React, { Fragment } from 'react';
+import React, { Fragment } from "react";
 // import PropTypes from 'prop-types';
 // import classnames from 'classnames';
-import { Input, Row, SideNav, Button, SideNavItem } from 'react-materialize';
-import SearchResultContainer from './SearchResultContainer';
+import { Input, Row, SideNav, Button, SideNavItem } from "react-materialize";
+import SearchResultContainer from "./SearchResultContainer";
 
 const Create = () => {
   return (
     <Fragment>
       <SideNav
         trigger={<Button>SIDE NAV DEMO</Button>}
-        options={{ closeOnClick: false, edge: 'right' }}
+        options={{ closeOnClick: false, edge: "right" }}
       >
         <Input label="Heading" />
         <Input type="select" label="Choose your heading style">
