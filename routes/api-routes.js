@@ -5,21 +5,21 @@
 // Dependencies
 // =============================================================
 
-// Requiring our Todo model
-var db = require("../models");
+// Requiring our User model
+var User = require("../models/user");
 
 var LocalStrategy = require("passport-local").Strategy;
 
 // Routes
 // =============================================================
-module.exports = function(app, passport) {
+module.exports = function(app, passport, mongoose) {
     // Define our storage for user data in passport
     passport.serializeUser(function(user, done) {
         done(null, user.email);
     });
     
     passport.deserializeUser(function(email, done) {
-        db.User.findAll({ where: {email: email }})
+        User.findOne({ email: email })
         .then(function (user) {
             done(null, user);
         })
@@ -32,10 +32,11 @@ module.exports = function(app, passport) {
     passport.use(new LocalStrategy(
         {usernameField:"email", passwordField:"password"},
         function(email, password, done) {
-            db.User.findOne({ 
-                where: {
+            // db.User.findOne({ 
+            User.findOne({
+                
                     email: email
-                } 
+                
             })
             .then( user => {
                 // can't find email case
@@ -87,8 +88,9 @@ module.exports = function(app, passport) {
     app.get("/api/email", (req, res) => {
         console.log(req.user);
         if(req.isAuthenticated()){
+            console.log(req.user);
             res.json({
-                email: req.user[0].dataValues.email
+                email: req.user.email
             });
         }
         else{
@@ -99,7 +101,7 @@ module.exports = function(app, passport) {
     });
 
     app.get("/testdb", (req, res) => {
-        db.User.findAll({})
+         User.find({})
         .then( dbUsers => {
             // We have access to the todos as an argument inside of the callback function
             res.json(dbUsers);
@@ -114,10 +116,10 @@ module.exports = function(app, passport) {
     });
 
     app.get("/testdb1", (req, res) => {
-        db.User.findOne({
-            where: {
+        User.findOne({
+           
                 email: "uniquename@csc.com"
-            }
+            
         })
         .then( dbUsers => {
             // We have access to the todos as an argument inside of the callback function
@@ -133,7 +135,7 @@ module.exports = function(app, passport) {
     });
     app.post("/api/user", (req, res) => {
         console.log(req.body);
-        db.User.create({
+        User.create({
             email: req.body.email,
             password: req.body.password
         })
