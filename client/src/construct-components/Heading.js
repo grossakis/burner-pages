@@ -7,12 +7,13 @@ class Heading extends Component {
         style={{
           textAlign: "center",
           color: this.props.headingColor,
-          size: this.props.headingSize,
-          font: this.props.headingFont
+          fontSize: this.props.headingSize,
+          fontFamily: this.props.headingFont,
+          border: this.props.border
         }}
         className="col s12"
       >
-        <h1>{this.props.headingContent}</h1>
+        <span>{this.props.headingContent}</span>
       </div>
     );
   }

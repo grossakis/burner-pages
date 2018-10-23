@@ -6,17 +6,17 @@ const expressSession = require("express-session");
 const passport = require("passport");
 const PORT = process.env.PORT || 3001;
 const app = express();
-// const mongoose = require("mongoose");
+ const mongoose = require("mongoose");
 // const Example = require("./exampleModel.js");
 
 //remember that this is your connection string.
 //we will change this later
-// if(typeof process.env.MONGODB_URI !== 'undefined' && process.env.MONGODB_URI.length > 0){
-//   mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
-// }
-// else{
-//   mongoose.connect("mongodb://localhost/testmern", { useNewUrlParser: true });
-// }
+ if(typeof process.env.MONGODB_URI !== 'undefined' && process.env.MONGODB_URI.length > 0){
+   mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+ }
+ else{
+   mongoose.connect("mongodb://localhost/burnerpages", { useNewUrlParser: true });
+ }
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -44,7 +44,7 @@ app.get("/michigan", (req, res) => {
   });
 });
 
-require("./routes/api-routes.js")(app, passport);
+require("./routes/api-routes.js")(app, passport, mongoose);
 
 // Send every other request to the React app
 // Define any API routes before this runs
