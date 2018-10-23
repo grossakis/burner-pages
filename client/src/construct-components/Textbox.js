@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Textbox extends Component {
   render() {
     return (
       <div
         style={{
-          textAlign: 'left',
+          textAlign: "left",
           color: this.props.textColor,
-          size: this.props.textSize,
-          font: this.props.textFont
+          fontSize: this.props.textSize,
+          fontFamily: this.props.textFont,
+          border: this.props.border
         }}
-        className="col s12"
+        className={"col s" + this.props.textboxWidth}
       >
         <p>{this.props.textContent}</p>
       </div>
