@@ -182,6 +182,51 @@ class PageConstructor extends Component {
     });
   };
 
+  // addElement = x => {
+  //   let rows = this.state.rows;
+  //   let rowComponents = this.state.rows[x].components;
+  //   // let rows = this.state.rows;
+  //   let newElement = {
+  //     status: "heading",
+  //     content: "This is a Heading",
+  //     color: "",
+  //     size: "",
+  //     font: ""
+  //   };
+  //   rowComponents.push(newElement);
+  //   rows.push(rowComponents);
+  //   // currentRow.push(newElement);
+
+  //   this.setState({
+  //     // test: "test"
+  //     rows: rows
+  //   });
+  // };
+  addElement = x => {
+    console.log("------start--------");
+    console.log(x);
+    console.log(this.state.rows);
+    let rows = this.state.rows;
+    let lastElement = this.state.lastElement + 1;
+    let rowComponents = rows[x].components;
+    let newElement = {
+      status: "heading",
+      content: "This is a Heading",
+      color: "",
+      size: "",
+      font: ""
+    };
+    rowComponents.push(newElement);
+    this.setState({
+      rows: rows,
+      lastElement: lastElement
+    });
+    console.log("final:");
+    console.log(rows);
+
+    console.log("------end--------");
+  };
+
   render() {
     let rows = this.state.rows;
     let lastElement = this.state.lastElement;

@@ -42,5 +42,4 @@ class NewRow extends Component {
     );
   }
 }
-
 export default NewRow;
