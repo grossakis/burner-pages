@@ -9,6 +9,7 @@
 var User = require("../models/user");
 
 var LocalStrategy = require("passport-local").Strategy;
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 // Routes
 // =============================================================
@@ -29,39 +30,54 @@ module.exports = function(app, passport, mongoose) {
         })
         ;
     });
-    passport.use(new LocalStrategy(
-        {usernameField:"email", passwordField:"password"},
-        function(email, password, done) {
-            // db.User.findOne({ 
-            User.findOne({
+    // passport.use(new LocalStrategy(
+    //     {usernameField:"email", passwordField:"password"},
+    //     function(email, password, done) {
+    //         // db.User.findOne({ 
+    //         User.findOne({
                 
-                    email: email
+    //                 email: email
                 
-            })
-            .then( user => {
-                // can't find email case
-                if(user == null){
-                    return done(null, false);
-                }
-                // password doesn't match
-                else if(user.password !== password){
-                    return done(null, false);
-                }
-                // finds the email and password matches
-                else{
-                    return done(null, user);
-                }
-            })
-            .catch( err => {
-                if (err) { return done(err); }
-            });
-            // function (err, user) {
+    //         })
+    //         .then( user => {
+    //             // can't find email case
+    //             if(user == null){
+    //                 return done(null, false);
+    //             }
+    //             // password doesn't match
+    //             else if(user.password !== password){
+    //                 return done(null, false);
+    //             }
+    //             // finds the email and password matches
+    //             else{
+    //                 return done(null, user);
+    //             }
+    //         })
+    //         .catch( err => {
+    //             if (err) { return done(err); }
+    //         });
+    //         // function (err, user) {
                 
-            //     if (!user) { return done(null, false); }
-            //     if (!user.verifyPassword(password)) { return done(null, false); }
-            //     return done(null, user);
-            // });
-        }
+    //         //     if (!user) { return done(null, false); }
+    //         //     if (!user.verifyPassword(password)) { return done(null, false); }
+    //         //     return done(null, user);
+    //         // });
+    //     }
+    passport.use(new GoogleStrategy({
+        clientID: "39321154145-ccaio8chpd22mkoccld4fg0gm4i0op0d.apps.googleusercontent.com",
+        clientSecret: "hiqYSXqlprZJFcGm98zfonNq",
+        callbackURL: "http://www.example.com/auth/google/callback"
+      },
+      function(accessToken, refreshToken, profile, done) {
+           User.findOne({ googleId: profile.id }, function (err, user) {
+               console.log(profile.id);
+             return done(err, user);
+           });
+      }
+    
+    ));
+ 
+
     ));
 
     // log in route
