@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../App.css';
 // import './Custom.css';
+import {Input, Row, Col, Button, Container } from "react-materialize";
+import { Link } from "react-router-dom";
 
 
 class Home extends Component {
@@ -9,12 +11,10 @@ class Home extends Component {
     console.log("scroll");
   };
   render() {
-    // return <p>Home</p>
     return(
-      
-      
-    
-      <div class = "container">
+      // <div className = "container">
+      <div>
+        {/* <br></br>
         <br></br>
         <br></br>
         <br></br>
@@ -22,121 +22,51 @@ class Home extends Component {
         <br></br>
         <br></br>
         <br></br>
-        <br></br>
-        <br></br>
+        <br></br> */}
+        {/* <Row></Row>
+        <Row></Row>
+        <Row></Row>
+        <Row></Row> */}
         
-        
-   <div class="logo">
-   
-</div>
-        
-        
-      <h1 class = "burner-pages">Burner Pages</h1>
-      
-      <div class = "row">
-        <div class = "col-md-2"></div>
-        <div class = "col-md-8 create">Create your free, fully responsive site here for just about anything.</div>
-        <div class = "col-md-2"></div>
+        <div>
+        <div className = "row logo">
+        <div className="logo-image"></div>
         </div>
-      <br></br>
-      <br></br>
-      <br></br>
-      
-    
-     
-     
-        <div class = "row">
-        <div class = "col-md-4"></div>
-        <div class = "col-md-4">
+        </div>
         
-      <a href="/about" class="btn btn-primary home-button">Why Us?</a>
-      </div>
-      <div class = "col-md-4"></div>
+       <Row> 
+        <h1 className="burner-pages">Burner Pages</h1>
+      </Row>
+      
+      <Row>
+        <h4 className="create">Create your free, fully responsive site here for just about anything.</h4>
+      </Row>
+      {/* <br></br>
+      <br></br>
+      <br></br> */}
+      
     
      
-      <br></br>
-      <br></br>
-      <br></br>
-      
-      
-      <div class = "col-md-4"></div>
-      <div class = "col-md-4">
-      <a href="/create" class="btn btn-primary home-button">Start Creating</a>
-      </div>
-      <div class = "col-md-4"></div>
-     </div>
      
-      
-     
-     
-
-      
-       {/* <div class="container">
-       <br />
-       <br />
-       <br />
-       <br />
-       <br />
-       <br />
-       <br /> */}
-
-       {/* <div class="logo" />
-
-       <h1>Why Us?</h1>
-      
-       <div class="row">
-       <div class="col-md-4"></div>
-         <div class="col-md-4 description" >Lorem Ipsum is simply dummy text of the printing and typesetting
-         industry. Lorem Ipsum has been the industry's standard dummy text ever
-         since the 1500s, when an unknown printer took a galley of type and
-         scrambled it to make a type specimen book. It has survived not only
-         five centuries, but also the leap into electronic typesetting,
-         remaining essentially unchanged. It was popularised in the 1960s with
-         the release of Letraset sheets containing Lorem Ipsum passages, and
-         more recently with desktop publishing software like Aldus PageMaker
-         including versions of Lorem Ipsum. </div>
-         <div class="col-md-4"></div>
-         </div>
-
-
+        <Row>
        
-       <br />
-       <br />
-       <br /> */}
-
-       {/* <div class="row">
-         <div class="col-md-4" />
-         <div class="col-md-4">
-           
-         </div>
-         <div class="col-md-4" />
-
-         <br />
-         <br />
-         <br />
-         <br />
-         <div class="col-md-4" />
-         <div class="col-md-4">
-           <a href="/create" class="btn btn-primary">
-             Start Creating
-           </a>
-         </div>
-         <div class="col-md-4" />
-       </div>
-     </div>
-     <div id = "app"></div> */}
+        <Button className="creating-button"> <Link to="/about">Why us?</Link></Button>
+        {/* <Col l={2}></Col> */}
+        </Row>
+        
      
+      {/* <br></br>
+      <br></br>
+      <br></br> */}
+      
+      <Row>
+      <Col l={5}></Col>
+      <Button className="creating-button"> <Link to="/construction">Start Creating</Link></Button>
+      {/* <Col m={3}></Col> */}
+      </Row>
      </div>
-
-     
-   
+    
     );
-   
-    
- 
-    
-    
-   
   }
 }
 
