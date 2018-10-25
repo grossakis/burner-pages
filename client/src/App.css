@@ -9,8 +9,11 @@
 }
 
 .logo{
-  background-image:url('../src/pages/images/logo-2.png');
+  background-image:url('../src/pages/images/airplane-logo.png');
   z-index: 1;
+  background-repeat: no-repeat;
+  background-position-y: 5%;
+  background-position-x: 50%;
 }
 
 .App-header {
@@ -37,7 +40,7 @@ height: 100%;
 
 .create{
   text-align: center;
-  position: relative;
+  /* position: relative; */
   margin-top: 20px;
   color: #fffaf0;
   font-size: 12pt;
@@ -51,7 +54,8 @@ height: 100%;
   padding: 10px;
   border-style:groove;
 	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  margin-top: -400px;
   
   /* background: #8360c3; fallback for old browsers */
   /* background: linear-gradient( #8360c3, #2ebf91); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -99,14 +103,16 @@ height: 100%;
   color: white;
 }
 
-.creating{
+.creating-button{
   position: relative;
   margin-top: 10px;
   background-color:#1a237e;
-  width: 13em;
+  color:white;
+  text-align:center;
+   width: 18em; 
 }
 
-.creating:hover
+.creating-button:hover
 {
         -webkit-transform: scale(1.1);
         -ms-transform: scale(1.1);
@@ -118,9 +124,10 @@ height: 100%;
 .home-button{
   text-align: center;
   background-color:#1a237e;
+  color: white;
   width: 13em;
   position: relative;
-  margin-left: 60px;
+  /* margin-left: 60px; */
 }
 
 .home-button:hover
