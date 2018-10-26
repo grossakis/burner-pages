@@ -12,13 +12,13 @@ class OwnNavBar extends Component {
           email={this.props.email}
           className="indigo darken-4"
           right
-        > <NavItem onClick={() => console.log('test click')}>
-        <Link to="/auth/google" className="navlink">
-         Google
-        </Link>
-      </NavItem>
-       
-
+        >
+          {' '}
+          <NavItem onClick={() => console.log('test click')}>
+            <Link to="/auth/google" className="navlink">
+              Google
+            </Link>
+          </NavItem>
           <NavItem onClick={() => console.log('test click')}>
             <Link to="/" className="navlink">
               Home
@@ -40,7 +40,7 @@ class OwnNavBar extends Component {
             </Link>
           </NavItem>
           <NavItem>
-            <Link to="/create" className="navlink">
+            <Link to="/construction" className="navlink">
               Create
             </Link>
           </NavItem>

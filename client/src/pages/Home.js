@@ -1,71 +1,50 @@
 import React, { Component } from 'react';
 import '../App.css';
-// import './Custom.css';
-import {Input, Row, Col, Button, Container } from "react-materialize";
-import { Link } from "react-router-dom";
-
+import { Input, Row, Col, Button, Container } from 'react-materialize';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
   handleScroll = event => {
     event.preventDefault();
-    console.log("scroll");
+    console.log('scroll');
   };
   render() {
-    return(
-      // <div className = "container">
-      <div>
-        {/* <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br> */}
-        {/* <Row></Row>
-        <Row></Row>
-        <Row></Row>
-        <Row></Row> */}
-        
-        <div>
-        <div className = "row logo">
-        <div className="logo-image"></div>
+    return (
+      <Container>
+        <div id="logo">
+          <div id="logo-image" />
         </div>
-        </div>
-        
-       <Row> 
-        <h1 className="burner-pages">Burner Pages</h1>
-      </Row>
-      
-      <Row>
-        <h4 className="create">Create your free, fully responsive site here for just about anything.</h4>
-      </Row>
-      {/* <br></br>
-      <br></br>
-      <br></br> */}
-      
-    
-     
-     
-        <Row>
-       
-        <Button className="creating-button"> <Link to="/about">Why us?</Link></Button>
-        {/* <Col l={2}></Col> */}
+        <Col
+          m={6}
+          s={12}
+          className="center"
+          style={{
+            color: 'white',
+            fontFamily: 'Verdana'
+          }}
+        >
+          <p
+            style={{
+              color: '#164E87',
+              fontFamily: 'Courier New',
+              fontWeight: 'bold'
+            }}
+          >
+            Create your free, fully responsive site here for just about
+            anything.
+          </p>
+        </Col>
+        <Row className="center">
+          <Link to="/about" style={{ color: 'white' }}>
+            <Button id="creating-button">Why us</Button>
+          </Link>
         </Row>
-        
-     
-      {/* <br></br>
-      <br></br>
-      <br></br> */}
-      
-      <Row>
-      <Col l={5}></Col>
-      <Button className="creating-button"> <Link to="/construction">Start Creating</Link></Button>
-      {/* <Col m={3}></Col> */}
-      </Row>
-     </div>
-    
+        <Row className="center">
+          <Link to="/construction" style={{ color: 'white' }}>
+            <Button id="creating-button">Start Creating </Button>
+          </Link>
+        </Row>
+      </Container>
     );
   }
 }
