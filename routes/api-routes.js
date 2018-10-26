@@ -9,7 +9,9 @@
 var User = require("../models/user");
 
 var LocalStrategy = require("passport-local").Strategy;
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var passport = require('passport');
+
 
 // Routes
 // =============================================================
@@ -63,22 +65,59 @@ module.exports = function(app, passport, mongoose) {
     //         //     return done(null, user);
     //         // });
     //     }
-    passport.use(new GoogleStrategy({
-        clientID: "39321154145-ccaio8chpd22mkoccld4fg0gm4i0op0d.apps.googleusercontent.com",
-        clientSecret: "hiqYSXqlprZJFcGm98zfonNq",
-        callbackURL: "http://www.example.com/auth/google/callback"
-      },
-      function(accessToken, refreshToken, profile, done) {
-           User.findOne({ googleId: profile.id }, function (err, user) {
-               console.log(profile.id);
-             return done(err, user);
-           });
-      }
-    
-    ));
- 
+    // ));
 
+//     passport.serializeUser(function(user, callback){
+//         console.log('serializing user.');
+//         callback(null, user.id);
+//     });
+
+// passport.deserializeUser(function(user, callback){
+//        console.log('deserialize user.');
+//        callback(null, user.id);
+//     });
+
+    passport.use(new GoogleStrategy({
+        clientID: '39321154145-ccaio8chpd22mkoccld4fg0gm4i0op0d.apps.googleusercontent.com',
+        clientSecret: 'hiqYSXqlprZJFcGm98zfonNq',
+        callbackURL: "http://127.0.0.1:3000/auth/google/callback"
+    },
+    function (accessToken, refreshToken, profile, done) {
+
+        User.findOrCreate({ googleId: profile.id }, function (err, user) {
+            console.log(profile);
+            return done(err, user);
+          });
+    }
     ));
+
+    app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile'] }));
+
+app.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/' }),
+  function(req, res) {
+    // Authenticated successfully
+    res.redirect('/');
+    console.log(req);
+    console.log(res);
+  });
+
+
+
+//     app.get('/auth/google', passport.authenticate('google',{scope: 'https://www.googleapis.com/auth/plus.me https://www.google.com/m8/feeds https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'}));
+
+// app.get('/auth/google/callback', function() {
+//     passport.authenticate('google', {
+//         successRedirect: '/',
+//         failureRedirect: '/'
+//     });
+// });
+// app.get('/logout', function (req, res) {
+//         req.logOut();
+//         res.redirect('/');
+//     });
+
 
     // log in route
     app.post('/api/login', 
