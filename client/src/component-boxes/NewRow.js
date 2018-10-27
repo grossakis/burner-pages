@@ -21,8 +21,11 @@ class NewRow extends Component {
             <NavItem onClick={() => this.props.addTextbox(this.props.id)}>
               add textbox
             </NavItem>
-            <NavItem onClick={() => this.props.addHeading(this.props.id)}>
+            <NavItem onClick={() => this.props.addImage(this.props.id)}>
               add image
+            </NavItem>
+            <NavItem onClick={() => this.props.addDivider(this.props.id)}>
+              add divider
             </NavItem>
           </Dropdown>
 

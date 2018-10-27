@@ -1,20 +1,24 @@
 import React, { Component } from "react";
+import { Col } from "react-materialize";
 
 class Textbox extends Component {
   render() {
     return (
-      <div
+      <Col
+        s={this.props.textboxWidth}
         style={{
           textAlign: "left",
           color: this.props.textColor,
           fontSize: this.props.textSize,
           fontFamily: this.props.textFont,
-          border: this.props.border
+          border: this.props.border,
+          wordBreak: "break-word",
+          backgroundColor: this.props.backgroundColor
         }}
-        className={"col s" + this.props.textboxWidth}
       >
         <p>{this.props.textContent}</p>
-      </div>
+        {this.props.editButtons}
+      </Col>
     );
   }
 }
