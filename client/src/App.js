@@ -1,10 +1,8 @@
 import React, { Fragment, Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import logo from "./logo.svg";
 import "./Rover.scss";
 import Home from "./pages/Home"; //???
 import About from "./pages/About"; //???
-import Create from "./construct-components/Create"; //???
 import Error from "./pages/Error"; //???
 import SignUp from "./pages/SignUp"; //???
 import Login from "./pages/Login"; //???
