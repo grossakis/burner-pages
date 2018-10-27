@@ -6,66 +6,80 @@
 // =============================================================
 
 // Requiring our User model
+var passport = require('passport');
 var User = require("../models/user");
+var googleUser = require("../models/googleUser");
+
 
 var LocalStrategy = require("passport-local").Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var passport = require('passport');
+
 
 
 // Routes
 // =============================================================
 module.exports = function(app, passport, mongoose) {
     // Define our storage for user data in passport
-    passport.serializeUser(function(user, done) {
-        done(null, user.email);
-    });
+    // passport.serializeUser(function(user, done) {
+    //     done(null, user);
+    // });
     
-    passport.deserializeUser(function(email, done) {
-        User.findOne({ email: email })
-        .then(function (user) {
-            done(null, user);
-        })
-        .catch(error => {
-            console.log(error);
-            done(error, false);
-        })
-        ;
+    // passport.deserializeUser(function(email, done) {
+    //     User.findOne({ email: email })
+    //     .then(function (user) {
+    //         done(null, user);
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+    //         done(error, false);
+    //     })
+    //     ;
+    // });
+     // used to serialize the user for the session
+     passport.serializeUser(function(user, done) {
+        done(null, user);
     });
-    // passport.use(new LocalStrategy(
-    //     {usernameField:"email", passwordField:"password"},
-    //     function(email, password, done) {
-    //         // db.User.findOne({ 
-    //         User.findOne({
+
+    // used to deserialize the user
+    passport.deserializeUser(function(id, done) {
+        User.findById(id, function(err, user) {
+            done(err, user);
+        });
+    });
+    passport.use(new LocalStrategy(
+        {usernameField:"email", passwordField:"password"},
+        function(email, password, done) {
+            // db.User.findOne({ 
+            User.findOne({
                 
-    //                 email: email
+                    email: email
                 
-    //         })
-    //         .then( user => {
-    //             // can't find email case
-    //             if(user == null){
-    //                 return done(null, false);
-    //             }
-    //             // password doesn't match
-    //             else if(user.password !== password){
-    //                 return done(null, false);
-    //             }
-    //             // finds the email and password matches
-    //             else{
-    //                 return done(null, user);
-    //             }
-    //         })
-    //         .catch( err => {
-    //             if (err) { return done(err); }
-    //         });
-    //         // function (err, user) {
+            })
+            .then( user => {
+                // can't find email case
+                if(user == null){
+                    return done(null, false);
+                }
+                // password doesn't match
+                else if(user.password !== password){
+                    return done(null, false);
+                }
+                // finds the email and password matches
+                else{
+                    return done(null, user);
+                }
+            })
+            .catch( err => {
+                if (err) { return done(err); }
+            });
+            // function (err, user) {
                 
-    //         //     if (!user) { return done(null, false); }
-    //         //     if (!user.verifyPassword(password)) { return done(null, false); }
-    //         //     return done(null, user);
-    //         // });
-    //     }
-    // ));
+            //     if (!user) { return done(null, false); }
+            //     if (!user.verifyPassword(password)) { return done(null, false); }
+            //     return done(null, user);
+            // });
+        }
+    ));
 
 //     passport.serializeUser(function(user, callback){
 //         console.log('serializing user.');
@@ -80,27 +94,29 @@ module.exports = function(app, passport, mongoose) {
     passport.use(new GoogleStrategy({
         clientID: '39321154145-ccaio8chpd22mkoccld4fg0gm4i0op0d.apps.googleusercontent.com',
         clientSecret: 'hiqYSXqlprZJFcGm98zfonNq',
-        callbackURL: "http://127.0.0.1:3000/auth/google/callback"
+        callbackURL: "http://localhost:3000/auth/google/callback"
     },
     function (accessToken, refreshToken, profile, done) {
 
-        User.findOrCreate({ googleId: profile.id }, function (err, user) {
-            console.log(profile);
+        User.find({ 'googleId': profile.id }, function (err, user) {
+            console.log("google");
             return done(err, user);
           });
     }
     ));
 
     app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile'] }));
+  passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 app.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/' }),
+  passport.authenticate('google'),
   function(req, res) {
+    console.log({
+        email:profile.emails[0].value
+    });
     // Authenticated successfully
     res.redirect('/');
-    console.log(req);
-    console.log(res);
+    
   });
 
 
