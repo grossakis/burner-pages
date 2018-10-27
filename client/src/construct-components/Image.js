@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Col } from "react-materialize";
+import React, { Component } from 'react';
+import { Col } from 'react-materialize';
 
 class Image extends Component {
   render() {
@@ -9,8 +9,8 @@ class Image extends Component {
         s={6}
         style={{
           border: this.props.border,
-          width: "100%",
-          height: "auto"
+          width: '100%',
+          height: 'auto'
         }}
       >
         {/* <img src={"'" + this.props.imageURL + "'"} /> */}
