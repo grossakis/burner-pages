@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Icon, Row, Col, Button, Container, SideNav } from "react-materialize";
+import { Icon, Row, Col, Button, Container, Input } from "react-materialize";
 // import './Custom.css';
 import NewRow from "../component-boxes/NewRow";
 import TextMenu from "../construct-components/TextMenu";
@@ -12,6 +12,7 @@ import ExtraComponentDropdown from "../construct-components/ExtraComponentDropdo
 import RowMenu from "../construct-components/RowMenu";
 import API from "../utils/API";
 import { setSeconds } from "date-fns";
+import axios from "axios";
 
 class PageConstructor extends Component {
   state = {
@@ -22,7 +23,8 @@ class PageConstructor extends Component {
       elementStatus: {}
     },
     editDisplay: "none",
-    rowWidth: 0
+    rowWidth: 0,
+    selectedFile: ""
   };
 
   addRow = () => {
@@ -56,18 +58,6 @@ class PageConstructor extends Component {
     currentComponent.color = color.hex;
     this.setState({
       rows
-    });
-  };
-
-  setComponentFont = event => {
-    let rows = this.state.rows;
-    let rowIndex = this.state.lastElement.rowIndex;
-    let componentIndex = this.state.lastElement.componentIndex;
-    let currentComponent = rows[rowIndex].components[componentIndex];
-    let font = event.target.value;
-    currentComponent.font = font;
-    this.setState({
-      rows: rows
     });
   };
 
@@ -133,21 +123,23 @@ class PageConstructor extends Component {
       for (let i = 0; i < rows[rowIndex].components.length; i++) {
         rowWidth += parseInt(rows[rowIndex].components[i].width);
       }
-      // console.log(rowWidth);
       this.setState({
         rows: rows,
         rowWidth: rowWidth
       });
     }
-    // currentComponent.width = width;
-    // for (let i = 0; i < rows[rowIndex].components.length; i++) {
-    //   rowWidth += parseInt(rows[rowIndex].components[i].width);
-    // }
-    // // console.log(rowWidth);
-    // this.setState({
-    //   rows: rows,
-    //   rowWidth: rowWidth
-    // });
+  };
+
+  setComponentFont = event => {
+    let rows = this.state.rows;
+    let rowIndex = this.state.lastElement.rowIndex;
+    let componentIndex = this.state.lastElement.componentIndex;
+    let currentComponent = rows[rowIndex].components[componentIndex];
+    let font = event.target.value;
+    currentComponent.font = font;
+    this.setState({
+      rows: rows
+    });
   };
 
   addHeading = x => {
@@ -156,9 +148,12 @@ class PageConstructor extends Component {
     let newElement = {
       status: "heading",
       content: "This is a Heading",
-      color: "22194D",
+      color: "#000000",
       size: "60px",
-      font: "times"
+      font: "times",
+      thickness: "",
+      url: "",
+      width: 12
     };
     let lastElement = {
       rowIndex: x,
@@ -188,9 +183,11 @@ class PageConstructor extends Component {
     let newElement = {
       status: "textbox",
       content: "this is a textbox",
-      color: "22194D",
+      color: "#000000",
       size: "18px",
       font: "times",
+      thickness: "",
+      url: "",
       width: newWidth
     };
     let lastElement = {
@@ -216,8 +213,13 @@ class PageConstructor extends Component {
     let rowComponents = rows[x].components;
     let newElement = {
       status: "divider",
-      color: "#22194D",
-      thickness: "10px"
+      content: "",
+      color: "#808080",
+      size: "",
+      font: "",
+      thickness: "2px",
+      url: "",
+      width: 12
     };
     let lastElement = {
       rowIndex: x,
@@ -246,6 +248,11 @@ class PageConstructor extends Component {
     let rowComponents = currentRow.components;
     let newElement = {
       status: "image",
+      content: "",
+      color: "",
+      size: "",
+      font: "",
+      thickness: "",
       url: "",
       width: newWidth
     };
@@ -320,6 +327,48 @@ class PageConstructor extends Component {
     });
   };
 
+  fileUploadHandler = () => {
+    const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dtergnssx/upload";
+    const CLOUDINARY_UPLOAD_PRESET = "xxsgqoid";
+
+    const fd = new FormData();
+    fd.append("file", this.state.selectedFile, this.state.selectedFile.name);
+    fd.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+
+    // const config = {
+    //   headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    // };
+
+    axios
+      .post(CLOUDINARY_URL, fd)
+      .then(res => {
+        console.log(res);
+        console.log(res.data.secure_url);
+        let rows = this.state.rows;
+        let currentRow = this.state.lastElement.rowIndex;
+        let currentComponent = this.state.lastElement.componentIndex;
+        rows[currentRow].components[currentComponent].url = res.data.secure_url;
+        this.setState({
+          rows: rows
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  fileSelectedHandler = event => {
+    console.log(event.target.files[0]);
+    this.setState(
+      {
+        selectedFile: event.target.files[0]
+      },
+      function() {
+        console.log(this.state.selectedFile);
+      }
+    );
+  };
+
   render() {
     let rows = this.state.rows;
     let lastElement = this.state.lastElement;
@@ -348,29 +397,6 @@ class PageConstructor extends Component {
 
     return (
       <Container>
-        <EditingContainer
-          display={this.state.editDisplay}
-          closeMenu={this.closeMenu}
-          textMenu={
-            <TextMenu
-              selectColor={lastElement.elementStatus.color}
-              handleChangeComplete={this.handleChangeComplete}
-              changeStyleF={this.setComponentFont}
-              selectFont={lastElement.elementStatus.font}
-              changeStyleS={this.setComponentSize}
-              selectSize={parseInt(lastElement.elementStatus.size)}
-              changeContent={this.setComponentContent}
-              selectContent={lastElement.elementStatus.content}
-              currentComponentStatus={lastElement.elementStatus.status}
-              selectWidth={lastElement.elementStatus.width}
-              changeWidth={this.setComponentWidth}
-              setThickness={this.setThickness}
-              selectThickness={parseInt(lastElement.elementStatus.thickness)}
-              selectURL={lastElement.elementStatus.url}
-              changeURL={this.setImageURL}
-            />
-          }
-        />
         {prependRow}
         {rows.map((row, index) => {
           if (index === lastElement.rowIndex) {
@@ -396,12 +422,6 @@ class PageConstructor extends Component {
                 addTextbox={this.addTextbox}
                 addDivider={this.addDivider}
                 addImage={this.addImage}
-                // onClick={() =>
-                //   this.editElement(
-                //     lastElement.rowIndex,
-                //     lastElement.componentIndex
-                //   )
-                // }
                 id={index}
                 key={index}
                 deleteRow={this.deleteRow}
@@ -499,6 +519,7 @@ class PageConstructor extends Component {
                     } else if (component.status === "image") {
                       return (
                         <Image
+                          imageWidth={component.width}
                           key={i}
                           border={currentEditComponent}
                           imageURL={component.url}
@@ -532,6 +553,68 @@ class PageConstructor extends Component {
         </Row>
 
         {console.log(this.state.rows)}
+
+        <EditingContainer
+          display={this.state.editDisplay}
+          closeMenu={this.closeMenu}
+          textMenu={
+            <TextMenu
+              selectColor={lastElement.elementStatus.color}
+              handleChangeComplete={this.handleChangeComplete}
+              changeFont={this.setComponentFont}
+              selectFont={lastElement.elementStatus.font}
+              changeStyleS={this.setComponentSize}
+              selectSize={parseInt(lastElement.elementStatus.size)}
+              changeContent={this.setComponentContent}
+              selectContent={lastElement.elementStatus.content}
+              currentComponentStatus={lastElement.elementStatus.status}
+              selectWidth={lastElement.elementStatus.width}
+              changeWidth={this.setComponentWidth}
+              setThickness={this.setThickness}
+              selectThickness={parseInt(lastElement.elementStatus.thickness)}
+              selectURL={lastElement.elementStatus.url}
+              changeURL={this.setImageURL}
+              fileSelectedHandler={this.fileSelectedHandler}
+              fileUploadHandler={this.fileUploadHandler}
+            />
+          }
+        />
+        <div
+          style={{
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            height: "100px",
+            width: "70%",
+            padding: "20px",
+            backgroundColor: "rgb(240, 240, 240, 0.75)",
+            borderTop: "solid rgb(230, 230, 230)",
+            borderRight: "solid rgb(230, 230, 230)",
+            borderRadius: "0 10px 0 0"
+          }}
+        >
+          <input
+            s={12}
+            type="textarea"
+            label="Type text here"
+            onChange={this.props.changeContent}
+            value={this.props.selectContent}
+            style={{ margin: "0 10px" }}
+          />
+          <button>post</button>
+        </div>
+        <div
+          style={{
+            backgroundColor: "white",
+            height: "100vh",
+            width: "100vw",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            // marginTop: "-22px",
+            zIndex: "-100"
+          }}
+        />
       </Container>
     );
   }
