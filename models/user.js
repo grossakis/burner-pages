@@ -17,9 +17,12 @@ var UserSchema = new Schema({
     email: {
         type: String
     },
-    pages: [{
-        type: String
-    }]
+    pages: [
+        {
+        type: Schema.Types.ObjectId,
+        ref: "Page"
+    }
+]
 });
 
 var User = mongoose.model("User", UserSchema);
