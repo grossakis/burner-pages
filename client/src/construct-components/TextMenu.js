@@ -13,7 +13,22 @@ import { SketchPicker, SliderPicker, CirclePicker } from "react-color";
 import SearchResultContainer from "./SearchResultContainer";
 
 class TextMenu extends Component {
-  state = {};
+  state = {
+    currentComponentStatus: null
+  };
+
+  componentDidMount = () => {
+    this.setState({
+      currentComponentStatus: this.props.currentComponentStatus
+    });
+  };
+
+  componentWillReceiveProps = nextProps => {
+    this.setState({
+      currentComponentStatus: nextProps.currentComponentStatus
+    });
+  };
+
   render() {
     let colorSelect = () => (
       <Fragment>
@@ -106,7 +121,7 @@ class TextMenu extends Component {
       //   type="select"
       //   label="Choose your font"
       //   s={12}
-      //   onChange={this.props.changeStyleF}
+      //   onChange={this.props.changeFont}
       //   defaultValue={this.props.selectFont}
       // >
       //   <option value={"helvetica"}>Helvetica</option>
@@ -115,6 +130,24 @@ class TextMenu extends Component {
       //   <option value={"courier"}>Courier</option>
       //   <option value={"verdana"}>Verdana</option>
       // </Input>
+      // <div>
+      //   <span>hello</span>
+      //   <select>
+      //     <option value="grapefruit">Grapefruit</option>
+      //     <option value="lime">Lime</option>
+      //     <option selected value="coconut">
+      //       Coconut
+      //     </option>
+      //     <option value="mango">Mango</option>
+      //   </select>
+      //   <select value={"a"}>
+      //     <option value="A">Apple</option>
+      //     <option value="B">Banana</option>
+      //     <option value="C">Cranberry</option>
+      //   </select>
+      //   <span>world</span>
+      // </div>
+
       <Autocomplete
         title="Choose your font"
         data={{
@@ -133,8 +166,17 @@ class TextMenu extends Component {
         defaultValue={this.props.selectThickness}
       />
     );
-    let currentComponentStatus = this.props.currentComponentStatus;
+    let currentComponentStatus = this.state.currentComponentStatus;
     let editOptions = "";
+    if (currentComponentStatus === "divider") {
+      editOptions = (
+        <Fragment>
+          <br />
+          {colorSelect()}
+          {thicknessSelect()}
+        </Fragment>
+      );
+    }
     if (currentComponentStatus === "heading") {
       editOptions = (
         <Fragment>
@@ -145,7 +187,9 @@ class TextMenu extends Component {
           {fontSizeSelect()}
         </Fragment>
       );
-    } else if (currentComponentStatus === "textbox") {
+    }
+
+    if (currentComponentStatus === "textbox") {
       editOptions = (
         <Fragment>
           <br />
@@ -154,17 +198,12 @@ class TextMenu extends Component {
           {textInput()}
           {fontSizeSelect()}
           {widthSelect()}
+          {/* {fontSelect()} */}
         </Fragment>
       );
-    } else if (currentComponentStatus === "divider") {
-      editOptions = (
-        <Fragment>
-          <br />
-          {colorSelect()}
-          {thicknessSelect()}
-        </Fragment>
-      );
-    } else if (currentComponentStatus === "image") {
+    }
+
+    if (currentComponentStatus === "image") {
       editOptions = (
         <Fragment>
           <br />

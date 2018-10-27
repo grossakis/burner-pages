@@ -59,18 +59,6 @@ class PageConstructor extends Component {
     });
   };
 
-  setComponentFont = event => {
-    let rows = this.state.rows;
-    let rowIndex = this.state.lastElement.rowIndex;
-    let componentIndex = this.state.lastElement.componentIndex;
-    let currentComponent = rows[rowIndex].components[componentIndex];
-    let font = event.target.value;
-    currentComponent.font = font;
-    this.setState({
-      rows: rows
-    });
-  };
-
   setComponentSize = event => {
     let rows = this.state.rows;
     let rowIndex = this.state.lastElement.rowIndex;
@@ -133,21 +121,23 @@ class PageConstructor extends Component {
       for (let i = 0; i < rows[rowIndex].components.length; i++) {
         rowWidth += parseInt(rows[rowIndex].components[i].width);
       }
-      // console.log(rowWidth);
       this.setState({
         rows: rows,
         rowWidth: rowWidth
       });
     }
-    // currentComponent.width = width;
-    // for (let i = 0; i < rows[rowIndex].components.length; i++) {
-    //   rowWidth += parseInt(rows[rowIndex].components[i].width);
-    // }
-    // // console.log(rowWidth);
-    // this.setState({
-    //   rows: rows,
-    //   rowWidth: rowWidth
-    // });
+  };
+
+  setComponentFont = event => {
+    let rows = this.state.rows;
+    let rowIndex = this.state.lastElement.rowIndex;
+    let componentIndex = this.state.lastElement.componentIndex;
+    let currentComponent = rows[rowIndex].components[componentIndex];
+    let font = event.target.value;
+    currentComponent.font = font;
+    this.setState({
+      rows: rows
+    });
   };
 
   addHeading = x => {
@@ -156,9 +146,12 @@ class PageConstructor extends Component {
     let newElement = {
       status: "heading",
       content: "This is a Heading",
-      color: "22194D",
+      color: "#FFFFFF",
       size: "60px",
-      font: "times"
+      font: "times",
+      thickness: "",
+      url: "",
+      width: 12
     };
     let lastElement = {
       rowIndex: x,
@@ -188,9 +181,11 @@ class PageConstructor extends Component {
     let newElement = {
       status: "textbox",
       content: "this is a textbox",
-      color: "22194D",
+      color: "#FFFFFF",
       size: "18px",
       font: "times",
+      thickness: "",
+      url: "",
       width: newWidth
     };
     let lastElement = {
@@ -216,8 +211,13 @@ class PageConstructor extends Component {
     let rowComponents = rows[x].components;
     let newElement = {
       status: "divider",
-      color: "#22194D",
-      thickness: "10px"
+      content: "",
+      color: "#808080",
+      size: "",
+      font: "",
+      thickness: "2px",
+      url: "",
+      width: 12
     };
     let lastElement = {
       rowIndex: x,
@@ -246,6 +246,11 @@ class PageConstructor extends Component {
     let rowComponents = currentRow.components;
     let newElement = {
       status: "image",
+      content: "",
+      color: "",
+      size: "",
+      font: "",
+      thickness: "",
       url: "",
       width: newWidth
     };
@@ -348,29 +353,6 @@ class PageConstructor extends Component {
 
     return (
       <Container>
-        <EditingContainer
-          display={this.state.editDisplay}
-          closeMenu={this.closeMenu}
-          textMenu={
-            <TextMenu
-              selectColor={lastElement.elementStatus.color}
-              handleChangeComplete={this.handleChangeComplete}
-              changeStyleF={this.setComponentFont}
-              selectFont={lastElement.elementStatus.font}
-              changeStyleS={this.setComponentSize}
-              selectSize={parseInt(lastElement.elementStatus.size)}
-              changeContent={this.setComponentContent}
-              selectContent={lastElement.elementStatus.content}
-              currentComponentStatus={lastElement.elementStatus.status}
-              selectWidth={lastElement.elementStatus.width}
-              changeWidth={this.setComponentWidth}
-              setThickness={this.setThickness}
-              selectThickness={parseInt(lastElement.elementStatus.thickness)}
-              selectURL={lastElement.elementStatus.url}
-              changeURL={this.setImageURL}
-            />
-          }
-        />
         {prependRow}
         {rows.map((row, index) => {
           if (index === lastElement.rowIndex) {
@@ -396,12 +378,6 @@ class PageConstructor extends Component {
                 addTextbox={this.addTextbox}
                 addDivider={this.addDivider}
                 addImage={this.addImage}
-                // onClick={() =>
-                //   this.editElement(
-                //     lastElement.rowIndex,
-                //     lastElement.componentIndex
-                //   )
-                // }
                 id={index}
                 key={index}
                 deleteRow={this.deleteRow}
@@ -532,6 +508,30 @@ class PageConstructor extends Component {
         </Row>
 
         {console.log(this.state.rows)}
+
+        <EditingContainer
+          display={this.state.editDisplay}
+          closeMenu={this.closeMenu}
+          textMenu={
+            <TextMenu
+              selectColor={lastElement.elementStatus.color}
+              handleChangeComplete={this.handleChangeComplete}
+              changeFont={this.setComponentFont}
+              selectFont={lastElement.elementStatus.font}
+              changeStyleS={this.setComponentSize}
+              selectSize={parseInt(lastElement.elementStatus.size)}
+              changeContent={this.setComponentContent}
+              selectContent={lastElement.elementStatus.content}
+              currentComponentStatus={lastElement.elementStatus.status}
+              selectWidth={lastElement.elementStatus.width}
+              changeWidth={this.setComponentWidth}
+              setThickness={this.setThickness}
+              selectThickness={parseInt(lastElement.elementStatus.thickness)}
+              selectURL={lastElement.elementStatus.url}
+              changeURL={this.setImageURL}
+            />
+          }
+        />
       </Container>
     );
   }
