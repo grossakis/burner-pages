@@ -14,8 +14,10 @@ class EditingContainer extends Component {
           height: "85%",
           overflow: "scroll",
           backgroundColor: "rgb(240, 240, 240, 0.75)",
-          border: "solid rgb(230, 230, 230)",
-          borderRadius: "10px",
+          borderTop: "solid rgb(230, 230, 230)",
+          borderBottom: "solid rgb(230, 230, 230)",
+          borderLeft: "solid rgb(230, 230, 230)",
+          borderRadius: "10px 0 0 10px",
           zIndex: 10
         }}
       >
