@@ -32,6 +32,7 @@
     "passport-google-oauth": "^1.0.0",
     "passport-google-oauth20": "^1.0.0",
     "passport-local": "^1.0.0",
+    "passport-oauth2": "^1.4.0",
     "react-color": "^2.14.1",
     "react-materialize": "^2.4.6",
     "sequelize": "^4.39.0"
