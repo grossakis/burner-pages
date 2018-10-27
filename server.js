@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const expressSession = require("express-session");
 const passport = require("passport");
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 const PORT = process.env.PORT || 3001;
 const app = express();
  const mongoose = require("mongoose");
@@ -37,7 +38,10 @@ if (process.env.NODE_ENV === "production") {
 
 
 
+
 // Define API routes here
+
+
 app.get("/michigan", (req, res) => {
   res.json({
     test: "uh Kristine"
