@@ -19,7 +19,8 @@ var UserSchema = new Schema({
     },
     pages: [
         {
-        type: Schema.Types.ObjectId,
+        type: Schema.Types.String,
+        // type: Schema.Types.ObjectId
         ref: "Page"
     }
 ]
