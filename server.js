@@ -11,6 +11,8 @@ const mongoose = require("mongoose");
 const User = require("./models/User");
 const Page = require("./models/Page");
 const db = require("./models");
+const env = require('dotenv').config();
+
 // const passportGoogleAuth = require('passport-google-oauth20');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
@@ -40,15 +42,15 @@ app.use(passport.session());
 console.log(
   {
     functionName: "passport use inputs in server.js",
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK
+    clientID: process.env.clientID,
+    clientSecret: process.env.clientSecret,
+    callbackURL: process.env.callbackURL
   }
 );
 passport.use(new GoogleStrategy({
-  clientID: '39321154145-ccaio8chpd22mkoccld4fg0gm4i0op0d.apps.googleusercontent.com',
-  clientSecret: 'hiqYSXqlprZJFcGm98zfonNq',
-  callbackURL: "http://localhost:3001/auth/google/callback"
+  clientID: process.env.clientID,
+  clientSecret: process.env.clientSecret,
+  callbackURL: process.env.callbackURL
 },
 function(accessToken, refreshToken, data, cb) {
   console.log(data.emails[0].value);
@@ -153,11 +155,11 @@ app.get('/submitsomething', (req, res) => {
       // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-      User.findOneAndUpdate({profileId: id}, { $push: { pages: dbPages._id} }, { new: true })
+      User.findOneAndUpdate({profileId: id}, { $push: { pages: dbPages.author} }, { new: true })
       .then(user => {
         console.log({
           routerSubfunction: "create page findOneAndUpdate",
-          dbPages: dbPages,
+          dbPages: dbPages.author,
           profileId: id,
           user: user
         });
@@ -167,6 +169,7 @@ app.get('/submitsomething', (req, res) => {
     .then(function(User) {
       // If the Library was updated successfully, send it back to the client
       res.json(User);
+      res.redirect('/api/email');
     })
     .catch(function(err) {
       // If an error occurs, send it back to the client
