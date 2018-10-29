@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Col } from "react-materialize";
+import React, { Component } from 'react';
+import { Col } from 'react-materialize';
 
 class Image extends Component {
   render() {
@@ -14,8 +14,8 @@ class Image extends Component {
         {/* <img src={"'" + this.props.imageURL + "'"} /> */}
         <img
           style={{
-            width: "100%",
-            height: "auto"
+            width: '100%',
+            height: 'auto'
           }}
           src={this.props.imageURL}
           alt="image"

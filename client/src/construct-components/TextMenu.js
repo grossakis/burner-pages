@@ -1,10 +1,10 @@
 import React, { Fragment, Component } from "react";
 // import PropTypes from 'prop-types';
 // import classnames from 'classnames';
-import { Autocomplete, Input, Row, Button, Col } from "react-materialize";
-import { SketchPicker, SliderPicker, CirclePicker } from "react-color";
-import SearchResultContainer from "./SearchResultContainer";
-import axios from "axios";
+import { Input, Row, Button, Col } from "react-materialize";
+import { SliderPicker, CirclePicker } from "react-color";
+// import SearchResultContainer from "./SearchResultContainer";
+// import axios from "axios";
 import Select from "@material-ui/core/Select";
 
 class TextMenu extends Component {

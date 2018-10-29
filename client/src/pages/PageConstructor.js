@@ -1,18 +1,18 @@
-import React, { Component, Fragment } from "react";
-import { Icon, Row, Col, Button, Container, Input } from "react-materialize";
+import React, { Component, Fragment } from 'react';
+import { Icon, Row, Button, Container } from 'react-materialize';
 // import './Custom.css';
-import NewRow from "../component-boxes/NewRow";
-import TextMenu from "../construct-components/TextMenu";
-import EditingContainer from "../construct-components/EditingContainer";
-import Heading from "../construct-components/Heading";
-import Textbox from "../construct-components/Textbox";
-import Divider from "../construct-components/Divider";
-import Image from "../construct-components/Image";
-import ExtraComponentDropdown from "../construct-components/ExtraComponentDropdown";
-import RowMenu from "../construct-components/RowMenu";
-import API from "../utils/API";
-import { setSeconds } from "date-fns";
-import axios from "axios";
+import NewRow from '../component-boxes/NewRow';
+import TextMenu from '../construct-components/TextMenu';
+import EditingContainer from '../construct-components/EditingContainer';
+import Heading from '../construct-components/Heading';
+import Textbox from '../construct-components/Textbox';
+import Divider from '../construct-components/Divider';
+import Image from '../construct-components/Image';
+// import ExtraComponentDropdown from "../construct-components/ExtraComponentDropdown";
+import RowMenu from '../construct-components/RowMenu';
+// import API from "../utils/API";
+// import { setSeconds } from "date-fns";
+import axios from 'axios';
 
 class PageConstructor extends Component {
   state = {
@@ -22,9 +22,9 @@ class PageConstructor extends Component {
       componentIndex: -1,
       elementStatus: {}
     },
-    editDisplay: "none",
+    editDisplay: 'none',
     rowWidth: 0,
-    selectedFile: ""
+    selectedFile: ''
   };
 
   addRow = () => {
@@ -67,7 +67,7 @@ class PageConstructor extends Component {
     let componentIndex = this.state.lastElement.componentIndex;
     let currentComponent = rows[rowIndex].components[componentIndex];
     let size = event.target.value;
-    currentComponent.size = size + "px";
+    currentComponent.size = size + 'px';
     this.setState({
       rows: rows
     });
@@ -104,7 +104,7 @@ class PageConstructor extends Component {
     let componentIndex = this.state.lastElement.componentIndex;
     let currentComponent = rows[rowIndex].components[componentIndex];
     let thickness = event.target.value;
-    currentComponent.thickness = thickness + "px";
+    currentComponent.thickness = thickness + 'px';
     this.setState({
       rows: rows
     });
@@ -146,13 +146,13 @@ class PageConstructor extends Component {
     let rows = this.state.rows;
     let rowComponents = rows[x].components;
     let newElement = {
-      status: "heading",
-      content: "This is a Heading",
-      color: "#000000",
-      size: "60px",
-      font: "times",
-      thickness: "",
-      url: "",
+      status: 'heading',
+      content: 'This is a Heading',
+      color: '#000000',
+      size: '60px',
+      font: 'times',
+      thickness: '',
+      url: '',
       width: 12
     };
     let lastElement = {
@@ -164,7 +164,7 @@ class PageConstructor extends Component {
     this.setState({
       rows: rows,
       lastElement: lastElement,
-      editDisplay: "block",
+      editDisplay: 'block',
       rowWidth: 12
     });
   };
@@ -181,13 +181,13 @@ class PageConstructor extends Component {
     let currentRow = rows[x];
     let rowComponents = currentRow.components;
     let newElement = {
-      status: "textbox",
-      content: "this is a textbox",
-      color: "#000000",
-      size: "18px",
-      font: "times",
-      thickness: "",
-      url: "",
+      status: 'textbox',
+      content: 'this is a textbox',
+      color: '#000000',
+      size: '18px',
+      font: 'times',
+      thickness: '',
+      url: '',
       width: newWidth
     };
     let lastElement = {
@@ -203,7 +203,7 @@ class PageConstructor extends Component {
     this.setState({
       rows: rows,
       lastElement: lastElement,
-      editDisplay: "block",
+      editDisplay: 'block',
       rowWidth: rowWidth
     });
   };
@@ -212,13 +212,13 @@ class PageConstructor extends Component {
     let rows = this.state.rows;
     let rowComponents = rows[x].components;
     let newElement = {
-      status: "divider",
-      content: "",
-      color: "#808080",
-      size: "",
-      font: "",
-      thickness: "2px",
-      url: "",
+      status: 'divider',
+      content: '',
+      color: '#808080',
+      size: '',
+      font: '',
+      thickness: '2px',
+      url: '',
       width: 12
     };
     let lastElement = {
@@ -230,7 +230,7 @@ class PageConstructor extends Component {
     this.setState({
       rows: rows,
       lastElement: lastElement,
-      editDisplay: "block",
+      editDisplay: 'block',
       rowWidth: 12
     });
   };
@@ -247,13 +247,13 @@ class PageConstructor extends Component {
     let currentRow = rows[x];
     let rowComponents = currentRow.components;
     let newElement = {
-      status: "image",
-      content: "",
-      color: "",
-      size: "",
-      font: "",
-      thickness: "",
-      url: "",
+      status: 'image',
+      content: '',
+      color: '',
+      size: '',
+      font: '',
+      thickness: '',
+      url: '',
       width: newWidth
     };
     let lastElement = {
@@ -269,7 +269,7 @@ class PageConstructor extends Component {
     this.setState({
       rows: rows,
       lastElement: lastElement,
-      editDisplay: "block",
+      editDisplay: 'block',
       rowWidth: rowWidth
     });
   };
@@ -287,13 +287,13 @@ class PageConstructor extends Component {
         componentIndex: y,
         elementStatus: currentComponent
       },
-      editDisplay: "block",
+      editDisplay: 'block',
       rowWidth: currentRowWidth
     });
   };
 
   deleteElement = (x, y) => {
-    console.log("y: " + y);
+    console.log('y: ' + y);
     let rows = this.state.rows;
     let components = rows[x].components;
     components.splice(y, 1);
@@ -304,7 +304,7 @@ class PageConstructor extends Component {
         componentIndex: -1,
         elementStatus: {}
       },
-      editDisplay: "none"
+      editDisplay: 'none'
     });
   };
 
@@ -323,17 +323,17 @@ class PageConstructor extends Component {
 
   closeMenu = () => {
     this.setState({
-      editDisplay: "none"
+      editDisplay: 'none'
     });
   };
 
   fileUploadHandler = () => {
-    const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dtergnssx/upload";
-    const CLOUDINARY_UPLOAD_PRESET = "xxsgqoid";
+    const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dtergnssx/upload';
+    const CLOUDINARY_UPLOAD_PRESET = 'xxsgqoid';
 
     const fd = new FormData();
-    fd.append("file", this.state.selectedFile, this.state.selectedFile.name);
-    fd.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+    fd.append('file', this.state.selectedFile, this.state.selectedFile.name);
+    fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
 
     // const config = {
     //   headers: { 'X-Requested-With': 'XMLHttpRequest' }
@@ -387,12 +387,12 @@ class PageConstructor extends Component {
     let prependRow;
     if (rows.length > 0) {
       prependRow = (
-        <Row style={{ textAlign: "center" }}>
+        <Row style={{ textAlign: 'center' }}>
           <Button onClick={this.prependRow}>new row</Button>
         </Row>
       );
     } else {
-      prependRow = "";
+      prependRow = '';
     }
 
     return (
@@ -400,7 +400,7 @@ class PageConstructor extends Component {
         {prependRow}
         {rows.map((row, index) => {
           if (index === lastElement.rowIndex) {
-            currentEditRow = "solid 2px #B5B5B5";
+            currentEditRow = 'solid 2px #B5B5B5';
             rowMenu = (
               <RowMenu
                 addHeading={this.addHeading}
@@ -412,8 +412,8 @@ class PageConstructor extends Component {
               />
             );
           } else {
-            currentEditRow = "none";
-            rowMenu = "";
+            currentEditRow = 'none';
+            rowMenu = '';
           }
           if (row.components[0] === undefined) {
             return (
@@ -441,11 +441,11 @@ class PageConstructor extends Component {
                       i === lastElement.componentIndex &&
                       index === lastElement.rowIndex
                     ) {
-                      currentEditComponent = "dashed 2px lightgray";
+                      currentEditComponent = 'dashed 2px lightgray';
                     } else {
-                      currentEditComponent = "none";
+                      currentEditComponent = 'none';
                     }
-                    if (component.status === "heading") {
+                    if (component.status === 'heading') {
                       return (
                         <Fragment key={i}>
                           <Heading
@@ -466,7 +466,7 @@ class PageConstructor extends Component {
                           </Button>
                         </Fragment>
                       );
-                    } else if (component.status === "textbox") {
+                    } else if (component.status === 'textbox') {
                       return (
                         <Textbox
                           key={i}
@@ -493,7 +493,7 @@ class PageConstructor extends Component {
                           }
                         />
                       );
-                    } else if (component.status === "divider") {
+                    } else if (component.status === 'divider') {
                       return (
                         <Divider
                           key={i}
@@ -516,7 +516,7 @@ class PageConstructor extends Component {
                           }
                         />
                       );
-                    } else if (component.status === "image") {
+                    } else if (component.status === 'image') {
                       return (
                         <Image
                           imageWidth={component.width}
@@ -548,7 +548,7 @@ class PageConstructor extends Component {
             );
           }
         })}
-        <Row style={{ textAlign: "center" }}>
+        <Row style={{ textAlign: 'center' }}>
           <Button onClick={this.addRow}>new row</Button>
         </Row>
 
@@ -581,16 +581,16 @@ class PageConstructor extends Component {
         />
         <div
           style={{
-            position: "fixed",
+            position: 'fixed',
             bottom: 0,
             left: 0,
-            height: "100px",
-            width: "70%",
-            padding: "20px",
-            backgroundColor: "rgb(240, 240, 240, 0.75)",
-            borderTop: "solid rgb(230, 230, 230)",
-            borderRight: "solid rgb(230, 230, 230)",
-            borderRadius: "0 10px 0 0"
+            height: '100px',
+            width: '70%',
+            padding: '20px',
+            backgroundColor: 'rgb(240, 240, 240, 0.75)',
+            borderTop: 'solid rgb(230, 230, 230)',
+            borderRight: 'solid rgb(230, 230, 230)',
+            borderRadius: '0 10px 0 0'
           }}
         >
           <input
@@ -599,20 +599,20 @@ class PageConstructor extends Component {
             label="Type text here"
             onChange={this.props.changeContent}
             value={this.props.selectContent}
-            style={{ margin: "0 10px" }}
+            style={{ margin: '0 10px' }}
           />
           <button>post</button>
         </div>
         <div
           style={{
-            backgroundColor: "white",
-            height: "100vh",
-            width: "100vw",
-            position: "fixed",
+            backgroundColor: 'white',
+            height: '100vh',
+            width: '100vw',
+            position: 'fixed',
             top: 0,
             left: 0,
             // marginTop: "-22px",
-            zIndex: "-100"
+            zIndex: '-100'
           }}
         />
       </Container>
