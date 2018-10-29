@@ -44,6 +44,11 @@ class OwnNavBar extends Component {
               Create
             </Link>
           </NavItem>
+          <NavItem>
+            <Link to="/logout" className="navlink">
+              Sign Out
+            </Link>
+          </NavItem>
         </Navbar>
       </Fragment>
     );
