@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { Row, Col, Button, Container } from 'react-materialize';
+import { Input, Row, Col, Button, Container } from 'react-materialize';
 import { Link } from 'react-router-dom';
 
 class Home extends Component {
