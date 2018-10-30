@@ -24,6 +24,9 @@ class NewRow extends Component {
             <NavItem onClick={() => this.props.addImage(this.props.id)}>
               add image
             </NavItem>
+            <NavItem onClick={() => this.props.addGif(this.props.id)}>
+              add GIF
+            </NavItem>
             <NavItem onClick={() => this.props.addDivider(this.props.id)}>
               add divider
             </NavItem>
