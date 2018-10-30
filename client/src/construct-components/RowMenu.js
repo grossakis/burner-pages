@@ -33,6 +33,9 @@ class RowMenu extends Component {
           <NavItem onClick={() => this.props.addImage(this.props.id)}>
             add image
           </NavItem>
+          <NavItem onClick={() => this.props.addGif(this.props.id)}>
+            add GIF
+          </NavItem>
         </Dropdown>
         <span style={{ padding: "0 10px", color: "#B5B5B5" }}>
           row space used:

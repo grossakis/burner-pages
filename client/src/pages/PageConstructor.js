@@ -1,18 +1,19 @@
-import React, { Component, Fragment } from 'react';
-import { Icon, Row, Col, Button, Container, Input } from 'react-materialize';
+import React, { Component, Fragment } from "react";
+import { Icon, Row, Col, Button, Container, Input } from "react-materialize";
 // import './Custom.css';
-import NewRow from '../component-boxes/NewRow';
-import TextMenu from '../construct-components/TextMenu';
-import EditingContainer from '../construct-components/EditingContainer';
-import Heading from '../construct-components/Heading';
-import Textbox from '../construct-components/Textbox';
-import Divider from '../construct-components/Divider';
-import Image from '../construct-components/Image';
-import ExtraComponentDropdown from '../construct-components/ExtraComponentDropdown';
-import RowMenu from '../construct-components/RowMenu';
-import API from '../utils/API';
-import { setSeconds } from 'date-fns';
-import axios from 'axios';
+import NewRow from "../component-boxes/NewRow";
+import TextMenu from "../construct-components/TextMenu";
+import EditingContainer from "../construct-components/EditingContainer";
+import Heading from "../construct-components/Heading";
+import Textbox from "../construct-components/Textbox";
+import Divider from "../construct-components/Divider";
+import Image from "../construct-components/Image";
+import ExtraComponentDropdown from "../construct-components/ExtraComponentDropdown";
+import RowMenu from "../construct-components/RowMenu";
+import API from "../utils/API";
+import { setSeconds } from "date-fns";
+import axios from "axios";
+import { SketchPicker, SliderPicker, CirclePicker } from "react-color";
 
 class PageConstructor extends Component {
   state = {
@@ -22,9 +23,10 @@ class PageConstructor extends Component {
       componentIndex: -1,
       elementStatus: {}
     },
-    editDisplay: 'none',
+    editDisplay: "none",
     rowWidth: 0,
-    selectedFile: ''
+    selectedFile: "",
+    pageBGcolor: "#FFFFFF"
   };
 
   addRow = () => {
@@ -61,13 +63,31 @@ class PageConstructor extends Component {
     });
   };
 
+  pageBGhandleChangeComplete = color => {
+    this.setState({
+      pageBGcolor: color.hex
+    });
+  };
+
+  BGhandleChangeComplete = color => {
+    let rows = this.state.rows;
+    let lastElement = this.state.lastElement;
+    let rowIndex = lastElement.rowIndex;
+    let componentIndex = lastElement.componentIndex;
+    let currentComponent = rows[rowIndex].components[componentIndex];
+    currentComponent.BGcolor = color.hex;
+    this.setState({
+      rows
+    });
+  };
+
   setComponentSize = event => {
     let rows = this.state.rows;
     let rowIndex = this.state.lastElement.rowIndex;
     let componentIndex = this.state.lastElement.componentIndex;
     let currentComponent = rows[rowIndex].components[componentIndex];
     let size = event.target.value;
-    currentComponent.size = size + 'px';
+    currentComponent.size = size + "px";
     this.setState({
       rows: rows
     });
@@ -80,6 +100,18 @@ class PageConstructor extends Component {
     let currentComponent = rows[rowIndex].components[componentIndex];
     let content = event.target.value;
     currentComponent.content = content;
+    this.setState({
+      rows: rows
+    });
+  };
+
+  gifSelect = x => {
+    let rows = this.state.rows;
+    let rowIndex = this.state.lastElement.rowIndex;
+    let componentIndex = this.state.lastElement.componentIndex;
+    let currentComponent = rows[rowIndex].components[componentIndex];
+    let url = x;
+    currentComponent.url = url;
     this.setState({
       rows: rows
     });
@@ -104,7 +136,7 @@ class PageConstructor extends Component {
     let componentIndex = this.state.lastElement.componentIndex;
     let currentComponent = rows[rowIndex].components[componentIndex];
     let thickness = event.target.value;
-    currentComponent.thickness = thickness + 'px';
+    currentComponent.thickness = thickness + "px";
     this.setState({
       rows: rows
     });
@@ -146,14 +178,15 @@ class PageConstructor extends Component {
     let rows = this.state.rows;
     let rowComponents = rows[x].components;
     let newElement = {
-      status: 'heading',
-      content: 'This is a Heading',
-      color: '#000000',
-      size: '60px',
-      font: 'times',
-      thickness: '',
-      url: '',
-      width: 12
+      status: "heading",
+      content: "This is a Heading",
+      color: "#000000",
+      size: "60px",
+      font: "times",
+      thickness: "",
+      url: "",
+      width: 12,
+      BGcolor: ""
     };
     let lastElement = {
       rowIndex: x,
@@ -164,7 +197,7 @@ class PageConstructor extends Component {
     this.setState({
       rows: rows,
       lastElement: lastElement,
-      editDisplay: 'block',
+      editDisplay: "block",
       rowWidth: 12
     });
   };
@@ -181,14 +214,15 @@ class PageConstructor extends Component {
     let currentRow = rows[x];
     let rowComponents = currentRow.components;
     let newElement = {
-      status: 'textbox',
-      content: 'this is a textbox',
-      color: '#000000',
-      size: '18px',
-      font: 'times',
-      thickness: '',
-      url: '',
-      width: newWidth
+      status: "textbox",
+      content: "this is a textbox",
+      color: "#000000",
+      size: "18px",
+      font: "times",
+      thickness: "",
+      url: "",
+      width: newWidth,
+      BGcolor: ""
     };
     let lastElement = {
       rowIndex: x,
@@ -203,7 +237,7 @@ class PageConstructor extends Component {
     this.setState({
       rows: rows,
       lastElement: lastElement,
-      editDisplay: 'block',
+      editDisplay: "block",
       rowWidth: rowWidth
     });
   };
@@ -212,14 +246,15 @@ class PageConstructor extends Component {
     let rows = this.state.rows;
     let rowComponents = rows[x].components;
     let newElement = {
-      status: 'divider',
-      content: '',
-      color: '#808080',
-      size: '',
-      font: '',
-      thickness: '2px',
-      url: '',
-      width: 12
+      status: "divider",
+      content: "",
+      color: "#808080",
+      size: "",
+      font: "",
+      thickness: "2px",
+      url: "",
+      width: 12,
+      BGcolor: ""
     };
     let lastElement = {
       rowIndex: x,
@@ -230,7 +265,7 @@ class PageConstructor extends Component {
     this.setState({
       rows: rows,
       lastElement: lastElement,
-      editDisplay: 'block',
+      editDisplay: "block",
       rowWidth: 12
     });
   };
@@ -247,14 +282,15 @@ class PageConstructor extends Component {
     let currentRow = rows[x];
     let rowComponents = currentRow.components;
     let newElement = {
-      status: 'image',
-      content: '',
-      color: '',
-      size: '',
-      font: '',
-      thickness: '',
-      url: '',
-      width: newWidth
+      status: "image",
+      content: "",
+      color: "",
+      size: "",
+      font: "",
+      thickness: "",
+      url: "",
+      width: newWidth,
+      BGcolor: ""
     };
     let lastElement = {
       rowIndex: x,
@@ -269,7 +305,47 @@ class PageConstructor extends Component {
     this.setState({
       rows: rows,
       lastElement: lastElement,
-      editDisplay: 'block',
+      editDisplay: "block",
+      rowWidth: rowWidth
+    });
+  };
+
+  addGif = x => {
+    let newWidth = 0;
+    if (this.state.rowWidth > 6 && this.state.rowWidth < 12) {
+      newWidth = 12 - this.state.rowWidth;
+    } else {
+      newWidth = 6;
+    }
+    let rowWidth = 0;
+    let rows = this.state.rows;
+    let currentRow = rows[x];
+    let rowComponents = currentRow.components;
+    let newElement = {
+      status: "gif",
+      content: "",
+      color: "",
+      size: "",
+      font: "",
+      thickness: "",
+      url: "",
+      width: newWidth,
+      BGcolor: ""
+    };
+    let lastElement = {
+      rowIndex: x,
+      componentIndex: rowComponents.length,
+      elementStatus: newElement
+    };
+    rowComponents.push(newElement);
+    for (let i = 0; i < rowComponents.length; i++) {
+      rowWidth += parseInt(rowComponents[i].width);
+    }
+    console.log(rowWidth);
+    this.setState({
+      rows: rows,
+      lastElement: lastElement,
+      editDisplay: "block",
       rowWidth: rowWidth
     });
   };
@@ -287,13 +363,13 @@ class PageConstructor extends Component {
         componentIndex: y,
         elementStatus: currentComponent
       },
-      editDisplay: 'block',
+      editDisplay: "block",
       rowWidth: currentRowWidth
     });
   };
 
   deleteElement = (x, y) => {
-    console.log('y: ' + y);
+    console.log("y: " + y);
     let rows = this.state.rows;
     let components = rows[x].components;
     components.splice(y, 1);
@@ -304,7 +380,7 @@ class PageConstructor extends Component {
         componentIndex: -1,
         elementStatus: {}
       },
-      editDisplay: 'none'
+      editDisplay: "none"
     });
   };
 
@@ -323,17 +399,17 @@ class PageConstructor extends Component {
 
   closeMenu = () => {
     this.setState({
-      editDisplay: 'none'
+      editDisplay: "none"
     });
   };
 
   fileUploadHandler = () => {
-    const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dtergnssx/upload';
-    const CLOUDINARY_UPLOAD_PRESET = 'xxsgqoid';
+    const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dtergnssx/upload";
+    const CLOUDINARY_UPLOAD_PRESET = "xxsgqoid";
 
     const fd = new FormData();
-    fd.append('file', this.state.selectedFile, this.state.selectedFile.name);
-    fd.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    fd.append("file", this.state.selectedFile, this.state.selectedFile.name);
+    fd.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
 
     // const config = {
     //   headers: { 'X-Requested-With': 'XMLHttpRequest' }
@@ -370,10 +446,10 @@ class PageConstructor extends Component {
   };
 
   savePageHandler = event => {
-    console.log('safda');
+    console.log("safda");
     let page;
     axios
-      .post('http://localhost:3001/api/email', (page = this.state.rows))
+      .post("http://localhost:3001/api/email", (page = this.state.rows))
       .then(res => {
         console.log(res);
         // // console.log(res.data.secure_url);
@@ -408,12 +484,12 @@ class PageConstructor extends Component {
     let prependRow;
     if (rows.length > 0) {
       prependRow = (
-        <Row style={{ textAlign: 'center' }}>
+        <Row style={{ textAlign: "center" }}>
           <Button onClick={this.prependRow}>new row</Button>
         </Row>
       );
     } else {
-      prependRow = '';
+      prependRow = "";
     }
 
     return (
@@ -421,20 +497,21 @@ class PageConstructor extends Component {
         {prependRow}
         {rows.map((row, index) => {
           if (index === lastElement.rowIndex) {
-            currentEditRow = 'solid 2px #B5B5B5';
+            currentEditRow = "solid 2px #B5B5B5";
             rowMenu = (
               <RowMenu
                 addHeading={this.addHeading}
                 addTextbox={this.addTextbox}
                 addImage={this.addImage}
+                addGif={this.addGif}
                 id={index}
                 currentRowWidth={this.state.rowWidth}
                 disabled={checkWidth()}
               />
             );
           } else {
-            currentEditRow = 'none';
-            rowMenu = '';
+            currentEditRow = "none";
+            rowMenu = "";
           }
           if (row.components[0] === undefined) {
             return (
@@ -443,6 +520,7 @@ class PageConstructor extends Component {
                 addTextbox={this.addTextbox}
                 addDivider={this.addDivider}
                 addImage={this.addImage}
+                addGif={this.addGif}
                 id={index}
                 key={index}
                 deleteRow={this.deleteRow}
@@ -462,11 +540,11 @@ class PageConstructor extends Component {
                       i === lastElement.componentIndex &&
                       index === lastElement.rowIndex
                     ) {
-                      currentEditComponent = 'dashed 2px lightgray';
+                      currentEditComponent = "dashed 2px lightgray";
                     } else {
-                      currentEditComponent = 'none';
+                      currentEditComponent = "none";
                     }
-                    if (component.status === 'heading') {
+                    if (component.status === "heading") {
                       return (
                         <Fragment key={i}>
                           <Heading
@@ -475,6 +553,7 @@ class PageConstructor extends Component {
                             headingColor={component.color}
                             headingSize={component.size}
                             headingFont={component.font}
+                            backgroundColor={component.BGcolor}
                           />
                           <Button onClick={() => this.editElement(index, i)}>
                             <Icon children="edit" />
@@ -487,7 +566,7 @@ class PageConstructor extends Component {
                           </Button>
                         </Fragment>
                       );
-                    } else if (component.status === 'textbox') {
+                    } else if (component.status === "textbox") {
                       return (
                         <Textbox
                           key={i}
@@ -497,6 +576,7 @@ class PageConstructor extends Component {
                           textSize={component.size}
                           textFont={component.font}
                           textboxWidth={component.width}
+                          backgroundColor={component.BGcolor}
                           editButtons={
                             <Fragment>
                               <Button
@@ -514,7 +594,7 @@ class PageConstructor extends Component {
                           }
                         />
                       );
-                    } else if (component.status === 'divider') {
+                    } else if (component.status === "divider") {
                       return (
                         <Divider
                           key={i}
@@ -537,7 +617,31 @@ class PageConstructor extends Component {
                           }
                         />
                       );
-                    } else if (component.status === 'image') {
+                    } else if (component.status === "image") {
+                      return (
+                        <Image
+                          imageWidth={component.width}
+                          key={i}
+                          border={currentEditComponent}
+                          imageURL={component.url}
+                          editButtons={
+                            <Fragment>
+                              <Button
+                                onClick={() => this.editElement(index, i)}
+                              >
+                                <Icon children="edit" />
+                              </Button>
+                              <Button
+                                onClick={() => this.deleteElement(index, i)}
+                                className="red darken-1"
+                              >
+                                <Icon children="close" />
+                              </Button>
+                            </Fragment>
+                          }
+                        />
+                      );
+                    } else if (component.status === "gif") {
                       return (
                         <Image
                           imageWidth={component.width}
@@ -569,7 +673,7 @@ class PageConstructor extends Component {
             );
           }
         })}
-        <Row style={{ textAlign: 'center' }}>
+        <Row style={{ textAlign: "center" }}>
           <Button onClick={this.addRow}>new row</Button>
         </Row>
 
@@ -582,6 +686,8 @@ class PageConstructor extends Component {
             <TextMenu
               selectColor={lastElement.elementStatus.color}
               handleChangeComplete={this.handleChangeComplete}
+              BGselectColor={lastElement.elementStatus.BGcolor}
+              BGhandleChangeComplete={this.BGhandleChangeComplete}
               changeFont={this.setComponentFont}
               selectFont={lastElement.elementStatus.font}
               changeStyleS={this.setComponentSize}
@@ -597,46 +703,80 @@ class PageConstructor extends Component {
               changeURL={this.setImageURL}
               fileSelectedHandler={this.fileSelectedHandler}
               fileUploadHandler={this.fileUploadHandler}
+              gifSelect={this.gifSelect}
             />
           }
         />
         <div
           style={{
-            position: 'fixed',
+            position: "fixed",
             bottom: 0,
-            // left: 0,
-            height: '100px',
-            width: '70%',
-            padding: '20px',
-            backgroundColor: 'rgb(240, 240, 240, 0.75)',
-            borderTop: 'solid rgb(230, 230, 230)',
-            borderRight: 'solid rgb(230, 230, 230)',
-            borderRadius: '0 10px 0 0'
-            // margin: 'auto'
+            left: 0,
+            height: "130px",
+            width: "70%",
+            padding: "20px",
+            backgroundColor: "rgb(240, 240, 240, 0.75)",
+            borderTop: "solid rgb(230, 230, 230)",
+            borderRight: "solid rgb(230, 230, 230)",
+            borderRadius: "0 10px 0 0"
           }}
         >
-          <input
-            s={12}
-            type="textarea"
-            label="Type text here"
-            placeholder="Enter page name to save"
-            onChange={this.props.changeContent}
-            value={this.props.selectContent}
-            style={{ margin: '0 10px' }}
-          />
-          {/* <Button onClick={() => console.log(this.state.rows)}>post</Button> */}
-          <Button onClick={this.savePageHandler}>post</Button>
+          <Row>
+            <Col s={6}>
+              <SliderPicker
+                // disableAlpha={true}
+                width="auto"
+                color={this.state.pageBGcolor}
+                onChangeComplete={this.pageBGhandleChangeComplete}
+              />
+              <br />
+              <CirclePicker
+                width="auto"
+                color={this.state.pageBGcolor}
+                onChangeComplete={this.pageBGhandleChangeComplete}
+                colors={[
+                  "#FFFFFF",
+                  "#E0E0E0",
+                  "#C0C0C0",
+                  "#A0A0A0",
+                  "#808080",
+                  "#606060",
+                  "#404040",
+                  "#202020",
+                  "#000000"
+                ]}
+              />
+            </Col>
+            <Col s={6}>
+              <input
+                s={12}
+                type="textarea"
+                label="Type text here"
+                onChange={this.props.changeContent}
+                value={this.props.selectContent}
+                style={{ margin: "0 10px" }}
+              />
+
+              <button>post</button>
+            </Col>
+          </Row>
         </div>
         <div
           style={{
-            backgroundColor: 'white',
-            height: '100vh',
-            width: '100vw',
-            position: 'fixed',
+            backgroundColor: this.state.pageBGcolor,
+            height: "100vh",
+            width: "100vw",
+            position: "fixed",
             top: 0,
             left: 0,
             // marginTop: "-22px",
-            zIndex: '-100'
+            zIndex: "-100"
+          }}
+        />
+        <div
+          style={{
+            height: "150px",
+            width: "100vw"
           }}
         />
       </Container>
