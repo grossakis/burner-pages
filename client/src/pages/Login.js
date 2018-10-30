@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import API from '../utils/API';
+import {Input, Row, Col, Button, Container } from "react-materialize";
+import { Link } from "react-router-dom";
 // import './Custom.css';
 
 class Login extends Component {
@@ -20,16 +22,42 @@ class Login extends Component {
   };
   render() {
     return (
+
+      <div className="container">
+
+       <Row> 
+        <h1 className="login-header">Log In</h1>
+      </Row>
+     
+       
+       {/* <div className = "row logo"> */}
+       <div className = "col-md-12 logo-image">
+       </div>
+       {/* </div>  */}
+       
       <div className="login-wrapper">
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="email">Email</label>
-          <input type="email" name="email" />
+          <label htmlFor="email" >Email</label>
+          <div className= "email-wrapper">
+          <input type="email" name="email" class="email" />
+          </div>
+          
           <br />
           <label htmlFor="password">Password</label>
+          <div className= "password-wrapper">
+         
           <input type="password" name="password" />
-          <button type="submit">Login</button>
+          </div>
+          <Row></Row>
+          <Row></Row>
+          <Row></Row>
+          <Row></Row>
+          <button type="submit" className = "submit-button">Login</button>
         </form>
       </div>
+      </div>
+     
+      
     );
   }
 }

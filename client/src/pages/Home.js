@@ -1,72 +1,67 @@
 import React, { Component } from 'react';
 import '../App.css';
-// import './Custom.css';
-import {Input, Row, Col, Button, Container } from "react-materialize";
-import { Link } from "react-router-dom";
-
+import { Input, Row, Col, Button, Container, Parallax } from 'react-materialize';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
   handleScroll = event => {
     event.preventDefault();
-    console.log("scroll");
+    console.log('scroll');
   };
+
+  
+
   render() {
-    return(
-      // <div className = "container">
-      <div>
-        {/* <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br> */}
-        {/* <Row></Row>
-        <Row></Row>
-        <Row></Row>
-        <Row></Row> */}
+    return (
         
-        <div>
-        <div className = "row logo">
-        <div className="logo-image"></div>
-        </div>
-        </div>
-        
-       <Row> 
-        <h1 className="burner-pages">Burner Pages</h1>
-      </Row>
+  <div className = "bg">
+        <div id="logo"></div>
+        <div className="home-caption">
+        <p id="home-description">Web Design Made Simple</p> 
+            
+        {/* <Link to="/about" style={{ color: 'white' }}> */}
+          
+     {/* <div className="row container">
+     <h2 className="header">Simple</h2>
+     <p className="grey-text text-darken-3 lighten-3">Start with your template of choice and make it your own.</p>
+      </div> */}
+          {/* <Parallax imageSrc="http://materializecss.com/images/parallax1.jpg" className="parallax-home"
+         />  */}
+         
       
-      <Row>
-        <h4 className="create">Create your free, fully responsive site here for just about anything.</h4>
-      </Row>
-      {/* <br></br>
-      <br></br>
-      <br></br> */}
-      
-    
      
-     
-        <Row>
+        </div>
        
-        <Button className="creating-button"> <Link to="/about">Why us?</Link></Button>
-        {/* <Col l={2}></Col> */}
-        </Row>
-        
      
-      {/* <br></br>
-      <br></br>
-      <br></br> */}
+        
+       
+          {/* <div id="logo-image" /> */}
+         
+         
+     
+          
+     {/* </Link> */}
       
-      <Row>
-      <Col l={5}></Col>
-      <Button className="creating-button"> <Link to="/construction">Start Creating</Link></Button>
-      {/* <Col m={3}></Col> */}
-      </Row>
-     </div>
     
-    );
+{/* </div>      */}
+     {/* <div>
+<div> */}
+
+
+       
+  
+  {/* <div className="section white">
+    <div className="row container">
+      <h2 className="header">Parallax</h2>
+      <p className="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
+    </div>
+  </div>
+  <Parallax imageSrc="http://materializecss.com/images/parallax2.jpg"/> */}
+ </div> 
+       
+        
+    
+         );
   }
 }
 

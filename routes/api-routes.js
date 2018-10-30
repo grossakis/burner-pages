@@ -30,55 +30,55 @@ module.exports = function(app, passport, mongoose) {
         })
         ;
     });
-    // passport.use(new LocalStrategy(
-    //     {usernameField:"email", passwordField:"password"},
-    //     function(email, password, done) {
-    //         // db.User.findOne({ 
-    //         User.findOne({
+    passport.use(new LocalStrategy(
+        {usernameField:"email", passwordField:"password"},
+        function(email, password, done) {
+            // db.User.findOne({ 
+            User.findOne({
                 
-    //                 email: email
+                    email: email
                 
-    //         })
-    //         .then( user => {
-    //             // can't find email case
-    //             if(user == null){
-    //                 return done(null, false);
-    //             }
-    //             // password doesn't match
-    //             else if(user.password !== password){
-    //                 return done(null, false);
-    //             }
-    //             // finds the email and password matches
-    //             else{
-    //                 return done(null, user);
-    //             }
-    //         })
-    //         .catch( err => {
-    //             if (err) { return done(err); }
-    //         });
-    //         // function (err, user) {
+            })
+            .then( user => {
+                // can't find email case
+                if(user == null){
+                    return done(null, false);
+                }
+                // password doesn't match
+                else if(user.password !== password){
+                    return done(null, false);
+                }
+                // finds the email and password matches
+                else{
+                    return done(null, user);
+                }
+            })
+            .catch( err => {
+                if (err) { return done(err); }
+            });
+            function (err, user) {
                 
-    //         //     if (!user) { return done(null, false); }
-    //         //     if (!user.verifyPassword(password)) { return done(null, false); }
-    //         //     return done(null, user);
-    //         // });
-    //     }
-    passport.use(new GoogleStrategy({
-        clientID: "39321154145-ccaio8chpd22mkoccld4fg0gm4i0op0d.apps.googleusercontent.com",
-        clientSecret: "hiqYSXqlprZJFcGm98zfonNq",
-        callbackURL: "http://www.example.com/auth/google/callback"
-      },
-      function(accessToken, refreshToken, profile, done) {
-           User.findOne({ googleId: profile.id }, function (err, user) {
-               console.log(profile.id);
-             return done(err, user);
-           });
-      }
+                if (!user) { return done(null, false); }
+                if (!user.verifyPassword(password)) { return done(null, false); }
+                return done(null, user);
+            });
+        }
+    // passport.use(new GoogleStrategy({
+    //     clientID: "39321154145-ccaio8chpd22mkoccld4fg0gm4i0op0d.apps.googleusercontent.com",
+    //     clientSecret: "hiqYSXqlprZJFcGm98zfonNq",
+    //     callbackURL: "http://www.example.com/auth/google/callback"
+    //   },
+    //   function(accessToken, refreshToken, profile, done) {
+    //        User.findOne({ googleId: profile.id }, function (err, user) {
+    //            console.log(profile.id);
+    //          return done(err, user);
+    //        });
+    //   }
     
     ));
  
 
-    ));
+    
 
     // log in route
     app.post('/api/login', 
@@ -128,7 +128,7 @@ module.exports = function(app, passport, mongoose) {
             });
             console.log(error);
         });
-        ;
+        
     });
 
     app.get("/testdb1", (req, res) => {
@@ -147,7 +147,7 @@ module.exports = function(app, passport, mongoose) {
             });
             console.log(error);
         });
-        ;
+        
     });
     app.post("/api/user", (req, res) => {
         console.log(req.body);
@@ -160,10 +160,9 @@ module.exports = function(app, passport, mongoose) {
         })
         .catch( error => {
             res.json({
-                error: "wtf man you messed this example up... no donuts for you!"
+                error: "error"
             });
         });
-        ;
+        
         
     });
-};
