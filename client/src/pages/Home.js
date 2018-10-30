@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import '../App.css';
+<<<<<<< HEAD
 import { Input, Row, Col, Button, Container, Parallax } from 'react-materialize';
+=======
+import { Input, Row, Col, Button, Container } from 'react-materialize';
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
 import { Link } from 'react-router-dom';
 
 class Home extends Component {
@@ -13,6 +17,7 @@ class Home extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
         
   <div className = "bg">
         <div id="logo"></div>
@@ -62,6 +67,44 @@ class Home extends Component {
         
     
          );
+=======
+      <Fragment>
+        <div id="logo">
+          <div id="logo-image" />
+        </div>
+        <Col
+          m={6}
+          s={12}
+          className="center"
+          style={{
+            color: 'white',
+            fontFamily: 'Verdana'
+          }}
+        >
+          <p
+            style={{
+              color: '#164E87',
+              fontFamily: 'Courier New',
+              fontWeight: 'bold'
+            }}
+          >
+            Create your free, fully responsive site here for just about
+            anything.
+          </p>
+        </Col>
+        <Row className="center">
+          <Link to="/about" style={{ color: 'white' }}>
+            <Button id="creating-button">Why us</Button>
+          </Link>
+        </Row>
+        <Row className="center">
+          <Link to="/construction" style={{ color: 'white' }}>
+            <Button id="creating-button">Start Creating </Button>
+          </Link>
+        </Row>
+      </Fragment>
+    );
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
   }
 }
 

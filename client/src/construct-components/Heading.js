@@ -1,20 +1,23 @@
 import React, { Component } from "react";
+import { Col } from "react-materialize";
 
 class Heading extends Component {
   render() {
     return (
-      <div
+      <Col
+        s={12}
         style={{
           textAlign: "center",
           color: this.props.headingColor,
           fontSize: this.props.headingSize,
           fontFamily: this.props.headingFont,
-          border: this.props.border
+          border: this.props.border,
+          wordBreak: "break-word",
+          backgroundColor: this.props.backgroundColor
         }}
-        className="col s12"
       >
         <span>{this.props.headingContent}</span>
-      </div>
+      </Col>
     );
   }
 }

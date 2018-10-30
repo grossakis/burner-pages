@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-image: url("pages/images/background-pattern.jpg");
+  background-image: url('pages/images/background-pattern.jpg');
 }
 
 .App-logo {
@@ -8,8 +8,8 @@
   height: 80px;
 }
 
-.logo{
-  background-image:url('../src/pages/images/airplane-logo.png');
+#logo {
+  background-image: url('../src/pages/images/airplane-logo.png');
   z-index: 1;
   background-repeat: no-repeat;
   background-position-y: 5%;
@@ -23,50 +23,51 @@
   color: white;
 }
 
-body, html{
-height: 100%;
+body,
+html {
+  height: 100%;
 }
 
 .App-intro {
   font-size: large;
 }
 
-.burner-pages{
+.burner-pages {
   text-align: center;
   font-size: 32pt;
   font-weight: bold;
   color: white;
 }
 
-.create{
+#create {
   text-align: center;
-  /* position: relative; */
+  position: relative;
   margin-top: 20px;
-  color: #fffaf0;
+  color: #164e87;
   font-size: 12pt;
+  font-family: 'Courier New';
+  font-weight: bold;
 }
 
-.why-us{
-   border-style: solid; 
+#why-us {
+  border-style: solid;
   margin: auto;
   color: #fff;
-	font-weight: bold;
+  font-weight: bold;
   padding: 10px;
-  border-style:groove;
-	-moz-border-radius: 5px;
+  border-style: groove;
+  -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
-  margin-top: -400px;
-  
+
   /* background: #8360c3; fallback for old browsers */
   /* background: linear-gradient( #8360c3, #2ebf91); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  width: 70%;
-  height: 420px;
+  width: 55%;
+  height: 325px;
   padding: 30px;
   position: relative;
-  right: 150px;
-  
 }
 
+<<<<<<< HEAD
 .logo-image{
   height: 200px;
   width:200px;
@@ -152,70 +153,78 @@ height: 100%;
 }
 
  /* .email:hover{
+=======
+#logo-image {
+  height: 200px;
+  width: 150px;
+  background-image: url('../src/pages/images/logo-2.png');
+}
+
+.why-us:hover {
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
   -webkit-transform: scale(1.1);
   -ms-transform: scale(1.1);
   transform: scale(1.1);
+}
 
+<<<<<<< HEAD
 }  */
 
 
 
 .description{
+=======
+.description {
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
   text-align: left;
   font-size: 36pt;
   color: white;
   font-weight: 750;
   padding: 0px;
-  
 }
 
-.company-image{
-  background-image: url('../src/pages/images/logo-2.png'); 
+.company-image {
+  background-image: url('../src/pages/images/logo-2.png');
   height: 30px;
   width: 20px;
   z-index: 1;
 }
 
-.caption{
+.caption {
   text-align: left;
   font-size: 12pt;
   color: white;
 }
 
-.creating-button{
+#creating-button {
   position: relative;
   margin-top: 10px;
-  background-color:#1a237e;
-  color:white;
-  text-align:center;
-   width: 18em; 
-}
-
-.creating-button:hover
-{
-        -webkit-transform: scale(1.1);
-        -ms-transform: scale(1.1);
-        transform: scale(1.1);
-}
-
-
-
-.home-button{
-  text-align: center;
-  background-color:#1a237e;
+  background-color: #1a237e;
   color: white;
-  width: 13em;
+  width: 18em;
+}
+
+#creating-button:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.home-button {
+  text-align: center;
+  background-color: #1a237e;
+  color: white;
+  width: 18em;
   position: relative;
-  /* margin-left: 60px; */
 }
 
-.home-button:hover
-{
-        -webkit-transform: scale(1.1);
-        -ms-transform: scale(1.1);
-        transform: scale(1.1);
+.home-button:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
+<<<<<<< HEAD
 .App {
   text-align: center;
   background-image: url('pages/images/background-pattern.jpg');
@@ -437,6 +446,8 @@ html {
   transform: scale(1.1);
 }
 
+=======
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
 body {
   min-height: 100%;
   background-position: center;
@@ -457,6 +468,7 @@ body {
     #7f7fd5
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+<<<<<<< HEAD
 
 @keyframes App-logo-spin {
   from {
@@ -618,8 +630,14 @@ background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+
         margin-right: 80px;
     }
   }
+=======
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

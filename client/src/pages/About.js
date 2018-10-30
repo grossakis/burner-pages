@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { Col, Row, Button, Container, Carousel, Parallax } from 'react-materialize';
+=======
+import { Col, Row, Button, Container } from 'react-materialize';
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
 import '../App.css';
 import { Link } from 'react-router-dom';
 
@@ -11,6 +15,7 @@ class About extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <div>
       
        <div className = "row logo">
@@ -22,11 +27,21 @@ class About extends Component {
         <Col
           m={12}
         //   s={12}
+=======
+      <Container className="left">
+        <div id="logo">
+          <div id="logo-image" />
+        </div>
+        <Col
+          m={6}
+          s={12}
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
           className="center"
           style={{
             color: 'white',
             fontFamily: 'Verdana'
           }}
+<<<<<<< HEAD
           />
           
 
@@ -85,6 +100,23 @@ class About extends Component {
 
 
        );
+=======
+        >
+          <h4>Build Single-Page Websites For Just About Anything.</h4>
+          <p>
+            Whether it's for your personal portfolio, branding, or just for fun,
+            we have you covered.
+          </p>
+        </Col>
+
+        <Row className="center">
+          <Link to="/construction" style={{ color: 'white' }}>
+            <Button id="creating-button">Start Creating </Button>
+          </Link>
+        </Row>
+      </Container>
+    );
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
   }
 }
 
