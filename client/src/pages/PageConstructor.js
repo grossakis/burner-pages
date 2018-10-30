@@ -712,7 +712,7 @@ class PageConstructor extends Component {
             position: "fixed",
             bottom: 0,
             left: 0,
-            height: "130px",
+            height: "150px",
             width: "70%",
             padding: "20px",
             backgroundColor: "rgb(240, 240, 240, 0.75)",
@@ -722,7 +722,8 @@ class PageConstructor extends Component {
           }}
         >
           <Row>
-            <Col s={6}>
+            <Col s={8}>
+              <span>Page Background Color</span>
               <SliderPicker
                 // disableAlpha={true}
                 width="auto"
@@ -747,17 +748,20 @@ class PageConstructor extends Component {
                 ]}
               />
             </Col>
-            <Col s={6}>
-              <input
-                s={12}
-                type="textarea"
-                label="Type text here"
-                onChange={this.props.changeContent}
-                value={this.props.selectContent}
-                style={{ margin: "0 10px" }}
-              />
-
-              <button>post</button>
+            <Col s={4}>
+              <div style={{ textAlign: "center" }}>
+                <span>Page Title: </span>
+                <input
+                  type="textarea"
+                  label="Type text here"
+                  onChange={this.props.changeContent}
+                  value={this.props.selectContent}
+                  style={{ margin: "0 10px" }}
+                />
+                <br />
+                <br />
+                <Button s={6}>post</Button>
+              </div>
             </Col>
           </Row>
         </div>
@@ -776,7 +780,7 @@ class PageConstructor extends Component {
         <div
           style={{
             height: "150px",
-            width: "100vw"
+            width: "50vw"
           }}
         />
       </Container>
