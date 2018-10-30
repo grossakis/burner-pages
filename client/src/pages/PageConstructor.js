@@ -769,7 +769,6 @@ class PageConstructor extends Component {
             position: "fixed",
             top: 0,
             left: 0,
-            // marginTop: "-22px",
             zIndex: "-100"
           }}
         />
