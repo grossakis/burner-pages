@@ -445,6 +445,27 @@ class PageConstructor extends Component {
     );
   };
 
+  savePageHandler = event => {
+    console.log("safda");
+    let page;
+    axios
+      .post("http://localhost:3001/api/email", (page = this.state.rows))
+      .then(res => {
+        console.log(res);
+        // // console.log(res.data.secure_url);
+        // let rows = this.state.rows;
+        // let currentRow = this.state.lastElement.rowIndex;
+        // let currentComponent = this.state.lastElement.componentIndex;
+        // rows[currentRow].components[currentComponent].url = res.data.secure_url;
+        // this.setState({
+        //   rows: rows
+        // });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   render() {
     let rows = this.state.rows;
     let lastElement = this.state.lastElement;
