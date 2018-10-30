@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import '../App.css';
 import { Input, Row, Col, Button, Container } from 'react-materialize';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ class Home extends Component {
   };
   render() {
     return (
-      <Container>
+      <Fragment>
         <div id="logo">
           <div id="logo-image" />
         </div>
@@ -44,7 +44,7 @@ class Home extends Component {
             <Button id="creating-button">Start Creating </Button>
           </Link>
         </Row>
-      </Container>
+      </Fragment>
     );
   }
 }

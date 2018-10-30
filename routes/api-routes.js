@@ -28,6 +28,14 @@ module.exports = function(app, passport, User){
             })
         }
     });
+
+    app.get('/logout', function(req, res) {
+        console.log("logged out!");
+        req.logout();
+        //redirect to home page
+        // res.redirect('/');
+        res.redirect('/api/email')
+    });
     
     app.get('/auth/google',
         passport.authenticate('google', { scope: ['profile', 'email'] }));
@@ -38,6 +46,8 @@ module.exports = function(app, passport, User){
             // Successful authentication, redirect home.
             res.redirect('http://localhost:3000/');
     });
+
+
 
     // app.post('/api/email', (req, res) => {
        
