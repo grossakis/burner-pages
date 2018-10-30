@@ -12,7 +12,8 @@ class Heading extends Component {
           fontSize: this.props.headingSize,
           fontFamily: this.props.headingFont,
           border: this.props.border,
-          wordBreak: "break-word"
+          wordBreak: "break-word",
+          backgroundColor: this.props.backgroundColor
         }}
       >
         <span>{this.props.headingContent}</span>

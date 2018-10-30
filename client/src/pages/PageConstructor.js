@@ -13,6 +13,7 @@ import RowMenu from "../construct-components/RowMenu";
 import API from "../utils/API";
 import { setSeconds } from "date-fns";
 import axios from "axios";
+import { SketchPicker, SliderPicker, CirclePicker } from "react-color";
 
 class PageConstructor extends Component {
   state = {
@@ -24,7 +25,8 @@ class PageConstructor extends Component {
     },
     editDisplay: "none",
     rowWidth: 0,
-    selectedFile: ""
+    selectedFile: "",
+    pageBGcolor: "#FFFFFF"
   };
 
   addRow = () => {
@@ -61,6 +63,24 @@ class PageConstructor extends Component {
     });
   };
 
+  pageBGhandleChangeComplete = color => {
+    this.setState({
+      pageBGcolor: color.hex
+    });
+  };
+
+  BGhandleChangeComplete = color => {
+    let rows = this.state.rows;
+    let lastElement = this.state.lastElement;
+    let rowIndex = lastElement.rowIndex;
+    let componentIndex = lastElement.componentIndex;
+    let currentComponent = rows[rowIndex].components[componentIndex];
+    currentComponent.BGcolor = color.hex;
+    this.setState({
+      rows
+    });
+  };
+
   setComponentSize = event => {
     let rows = this.state.rows;
     let rowIndex = this.state.lastElement.rowIndex;
@@ -80,6 +100,18 @@ class PageConstructor extends Component {
     let currentComponent = rows[rowIndex].components[componentIndex];
     let content = event.target.value;
     currentComponent.content = content;
+    this.setState({
+      rows: rows
+    });
+  };
+
+  gifSelect = x => {
+    let rows = this.state.rows;
+    let rowIndex = this.state.lastElement.rowIndex;
+    let componentIndex = this.state.lastElement.componentIndex;
+    let currentComponent = rows[rowIndex].components[componentIndex];
+    let url = x;
+    currentComponent.url = url;
     this.setState({
       rows: rows
     });
@@ -153,7 +185,8 @@ class PageConstructor extends Component {
       font: "times",
       thickness: "",
       url: "",
-      width: 12
+      width: 12,
+      BGcolor: ""
     };
     let lastElement = {
       rowIndex: x,
@@ -188,7 +221,8 @@ class PageConstructor extends Component {
       font: "times",
       thickness: "",
       url: "",
-      width: newWidth
+      width: newWidth,
+      BGcolor: ""
     };
     let lastElement = {
       rowIndex: x,
@@ -219,7 +253,8 @@ class PageConstructor extends Component {
       font: "",
       thickness: "2px",
       url: "",
-      width: 12
+      width: 12,
+      BGcolor: ""
     };
     let lastElement = {
       rowIndex: x,
@@ -254,7 +289,48 @@ class PageConstructor extends Component {
       font: "",
       thickness: "",
       url: "",
-      width: newWidth
+      width: newWidth,
+      BGcolor: ""
+    };
+    let lastElement = {
+      rowIndex: x,
+      componentIndex: rowComponents.length,
+      elementStatus: newElement
+    };
+    rowComponents.push(newElement);
+    for (let i = 0; i < rowComponents.length; i++) {
+      rowWidth += parseInt(rowComponents[i].width);
+    }
+    console.log(rowWidth);
+    this.setState({
+      rows: rows,
+      lastElement: lastElement,
+      editDisplay: "block",
+      rowWidth: rowWidth
+    });
+  };
+
+  addGif = x => {
+    let newWidth = 0;
+    if (this.state.rowWidth > 6 && this.state.rowWidth < 12) {
+      newWidth = 12 - this.state.rowWidth;
+    } else {
+      newWidth = 6;
+    }
+    let rowWidth = 0;
+    let rows = this.state.rows;
+    let currentRow = rows[x];
+    let rowComponents = currentRow.components;
+    let newElement = {
+      status: "gif",
+      content: "",
+      color: "",
+      size: "",
+      font: "",
+      thickness: "",
+      url: "",
+      width: newWidth,
+      BGcolor: ""
     };
     let lastElement = {
       rowIndex: x,
@@ -406,6 +482,7 @@ class PageConstructor extends Component {
                 addHeading={this.addHeading}
                 addTextbox={this.addTextbox}
                 addImage={this.addImage}
+                addGif={this.addGif}
                 id={index}
                 currentRowWidth={this.state.rowWidth}
                 disabled={checkWidth()}
@@ -422,6 +499,7 @@ class PageConstructor extends Component {
                 addTextbox={this.addTextbox}
                 addDivider={this.addDivider}
                 addImage={this.addImage}
+                addGif={this.addGif}
                 id={index}
                 key={index}
                 deleteRow={this.deleteRow}
@@ -454,6 +532,7 @@ class PageConstructor extends Component {
                             headingColor={component.color}
                             headingSize={component.size}
                             headingFont={component.font}
+                            backgroundColor={component.BGcolor}
                           />
                           <Button onClick={() => this.editElement(index, i)}>
                             <Icon children="edit" />
@@ -476,6 +555,7 @@ class PageConstructor extends Component {
                           textSize={component.size}
                           textFont={component.font}
                           textboxWidth={component.width}
+                          backgroundColor={component.BGcolor}
                           editButtons={
                             <Fragment>
                               <Button
@@ -540,6 +620,30 @@ class PageConstructor extends Component {
                           }
                         />
                       );
+                    } else if (component.status === "gif") {
+                      return (
+                        <Image
+                          imageWidth={component.width}
+                          key={i}
+                          border={currentEditComponent}
+                          imageURL={component.url}
+                          editButtons={
+                            <Fragment>
+                              <Button
+                                onClick={() => this.editElement(index, i)}
+                              >
+                                <Icon children="edit" />
+                              </Button>
+                              <Button
+                                onClick={() => this.deleteElement(index, i)}
+                                className="red darken-1"
+                              >
+                                <Icon children="close" />
+                              </Button>
+                            </Fragment>
+                          }
+                        />
+                      );
                     }
                   })}
                 </Row>
@@ -561,6 +665,8 @@ class PageConstructor extends Component {
             <TextMenu
               selectColor={lastElement.elementStatus.color}
               handleChangeComplete={this.handleChangeComplete}
+              BGselectColor={lastElement.elementStatus.BGcolor}
+              BGhandleChangeComplete={this.BGhandleChangeComplete}
               changeFont={this.setComponentFont}
               selectFont={lastElement.elementStatus.font}
               changeStyleS={this.setComponentSize}
@@ -576,6 +682,7 @@ class PageConstructor extends Component {
               changeURL={this.setImageURL}
               fileSelectedHandler={this.fileSelectedHandler}
               fileUploadHandler={this.fileUploadHandler}
+              gifSelect={this.gifSelect}
             />
           }
         />
@@ -584,7 +691,7 @@ class PageConstructor extends Component {
             position: "fixed",
             bottom: 0,
             left: 0,
-            height: "100px",
+            height: "130px",
             width: "70%",
             padding: "20px",
             backgroundColor: "rgb(240, 240, 240, 0.75)",
@@ -593,19 +700,49 @@ class PageConstructor extends Component {
             borderRadius: "0 10px 0 0"
           }}
         >
-          <input
-            s={12}
-            type="textarea"
-            label="Type text here"
-            onChange={this.props.changeContent}
-            value={this.props.selectContent}
-            style={{ margin: "0 10px" }}
-          />
-          <button>post</button>
+          <Row>
+            <Col s={6}>
+              <SliderPicker
+                // disableAlpha={true}
+                width="auto"
+                color={this.state.pageBGcolor}
+                onChangeComplete={this.pageBGhandleChangeComplete}
+              />
+              <br />
+              <CirclePicker
+                width="auto"
+                color={this.state.pageBGcolor}
+                onChangeComplete={this.pageBGhandleChangeComplete}
+                colors={[
+                  "#FFFFFF",
+                  "#E0E0E0",
+                  "#C0C0C0",
+                  "#A0A0A0",
+                  "#808080",
+                  "#606060",
+                  "#404040",
+                  "#202020",
+                  "#000000"
+                ]}
+              />
+            </Col>
+            <Col s={6}>
+              <input
+                s={12}
+                type="textarea"
+                label="Type text here"
+                onChange={this.props.changeContent}
+                value={this.props.selectContent}
+                style={{ margin: "0 10px" }}
+              />
+
+              <button>post</button>
+            </Col>
+          </Row>
         </div>
         <div
           style={{
-            backgroundColor: "white",
+            backgroundColor: this.state.pageBGcolor,
             height: "100vh",
             width: "100vw",
             position: "fixed",
@@ -613,6 +750,12 @@ class PageConstructor extends Component {
             left: 0,
             // marginTop: "-22px",
             zIndex: "-100"
+          }}
+        />
+        <div
+          style={{
+            height: "150px",
+            width: "100vw"
           }}
         />
       </Container>
