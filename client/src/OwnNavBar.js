@@ -33,11 +33,11 @@ class OwnNavBar extends Component {
               Sign Up
             </Link>
           </NavItem> */}
-          <NavItem>
+          {/* <NavItem>
             <Link to="/auth/google" className="navlink">
               Login
             </Link>
-          </NavItem>
+          </NavItem> */}
           <NavItem>
             <Link to="/construction" className="navlink">
               Create
