@@ -446,20 +446,13 @@ class PageConstructor extends Component {
   };
 
   savePageHandler = event => {
-    console.log("safda");
-    let page;
+    event.preventDefault();
+    console.log(this.state.rows);
+    // let pages;
     axios
-      .post("http://localhost:3001/api/email", (page = this.state.rows))
+      .post("/submitsomething", this.state.rows)
       .then(res => {
         console.log(res);
-        // // console.log(res.data.secure_url);
-        // let rows = this.state.rows;
-        // let currentRow = this.state.lastElement.rowIndex;
-        // let currentComponent = this.state.lastElement.componentIndex;
-        // rows[currentRow].components[currentComponent].url = res.data.secure_url;
-        // this.setState({
-        //   rows: rows
-        // });
       })
       .catch(err => {
         console.log(err);
@@ -760,7 +753,9 @@ class PageConstructor extends Component {
                 />
                 <br />
                 <br />
-                <Button s={6}>post</Button>
+                <Button onClick={this.savePageHandler} s={6}>
+                  post
+                </Button>
               </div>
             </Col>
           </Row>
