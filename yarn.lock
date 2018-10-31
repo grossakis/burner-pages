@@ -2434,6 +2434,12 @@ react-materialize@^2.4.6:
     react "^16.2.0"
     react-dom "^16.2.0"
 
+<<<<<<< HEAD
+react-parallax@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-parallax/-/react-parallax-2.0.1.tgz#22448e166eeb3206ee1a2bd90027d65b56a2a085"
+  integrity sha512-apzMLQzr2HhOn4TmekFoQjlDyK/MzBv6Vk2CpykUMC0u0lFKIzkuB8jMaDX5Pr088cWoD1SU7OIVDsMG1GhSDw==
+=======
 react-transition-group@^2.2.1:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.5.0.tgz#70bca0e3546102c4dc5cf3f5f57f73447cce6874"
@@ -2443,6 +2449,7 @@ react-transition-group@^2.2.1:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
 
 react@^16.2.0:
   version "16.5.2"

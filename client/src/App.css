@@ -67,6 +67,93 @@ html {
   position: relative;
 }
 
+<<<<<<< HEAD
+.logo-image{
+  height: 200px;
+  width:200px;
+  /* background-image: url('../src/pages/images/logo-2.png'); */
+  /* background: black; */
+}
+
+.login-wrapper{
+ 
+  width: 400px;
+  margin-bottom: 2em;
+  padding: 2em;
+  background: rgba(22, 22, 22, 0.61);
+    border-radius: 8px;
+    padding: 2.5em;
+    max-width: 100%;
+    margin-bottom: 3em;
+    margin-left: 332px;
+    height: 330px;
+}
+
+.about-wrapper{
+  
+  margin-bottom: 2em;
+  padding: 2em;
+  background-color: rgba(0,0,0,.4);
+  
+    border-radius: 8px;
+    padding: 2.5em;
+    max-width: 100%;
+    margin-bottom: 3em;
+    width:75%;
+    margin-left: 130px;
+    
+   
+  
+}
+
+.email{
+  color:white;
+}
+
+.submit-button{
+  position: relative;
+  margin-top: 10px;
+  background-color:#1a237e;
+  color:white;
+  text-align:center;
+   width: 22em; 
+   bottom:40px;
+   background: rgba(10, 156, 144, 0.61);
+   border-radius: 8px;
+   border-color: rgba(22, 22, 22, 0.61);
+   padding: 8px;;
+   max-width: 100%;
+   
+}
+
+.submit-button:hover{
+  
+  background: rgba(10, 156, 144, 0.842);;
+}
+
+.email-wrapper, .password-wrapper{
+  background: rgba(71,73,88,0.475);
+  border:solid rgba(71,73,88,0.475);
+  width: 100%;
+  height:40px;
+  border-style:groove;
+	-moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
+
+.email{
+  color:white;
+}
+
+.login-header{
+  text-align:center;
+  color:white;
+  font-size:32pt;
+  font-weight: bold;
+}
+
+ /* .email:hover{
+=======
 #logo-image {
   height: 200px;
   width: 150px;
@@ -74,12 +161,21 @@ html {
 }
 
 .why-us:hover {
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
   -webkit-transform: scale(1.1);
   -ms-transform: scale(1.1);
   transform: scale(1.1);
 }
 
+<<<<<<< HEAD
+}  */
+
+
+
+.description{
+=======
 .description {
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
   text-align: left;
   font-size: 36pt;
   color: white;
@@ -128,6 +224,230 @@ html {
   transform: scale(1.1);
 }
 
+<<<<<<< HEAD
+.App {
+  text-align: center;
+  background-image: url('pages/images/background-pattern.jpg');
+}
+
+
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+#home-description{
+  z-index:1;
+  margin-left: 33vw;
+  position: relative;
+  margin-top: 0vh;
+  font-family: 'Brush Script MT', Brush Script Std, cursive;
+  font-weight: bold;
+  color: #6495ED;
+  font-size: 3.5em;           
+  
+  
+  
+} 
+
+.bg{
+  background-image: url('pages/images/bg-typing.jpg');
+  justify-content: center;
+  margin-top: -22px;
+  height: 91vh;
+  background-repeat: no-repeat;
+  overflow: hidden; 
+}
+
+
+
+#logo {
+  background-image: url('../src/pages/images/airplane-logo.png');
+  z-index: 1;
+  height: 260px;
+  background-repeat: no-repeat;
+  background-position-x: 49.5%;
+  background-position-y: 0%;
+  
+}
+
+.about-header{
+  font-size: 32px;
+  color:white;
+    font-size: 3.5em;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+}
+
+h2{
+  font-family:sans-serif;
+}
+
+
+#navLink{
+  font-family: 'sans-serif';
+  font-size: 13pt;
+}
+
+
+.about-caption{
+  margin: 2em 0;
+  font-size: 14pt;
+  color:white;
+  
+  
+}
+
+
+.left{
+  width:600px;
+  height:100px;
+}
+
+.right{
+  width:600px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+body,
+html {
+  height: 100%;
+  
+  
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.burner-pages {
+  text-align: center;
+  font-size: 32pt;
+  font-weight: bold;
+  color: white;
+}
+
+#create {
+  text-align: center;
+  position: relative;
+  margin-top: 20px;
+  color: #164e87;
+  font-size: 12pt;
+  font-family: 'Courier New';
+  font-weight: bold;
+}
+
+#why-us {
+  border-style: solid;
+  margin: auto;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+  border-style: groove;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+
+  /* background: #8360c3; fallback for old browsers */
+  /* background: linear-gradient( #8360c3, #2ebf91); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  width: 55%;
+  height: 325px;
+  padding: 30px;
+  position: relative;
+}
+
+.home-page{
+  background-image: url("pages/images/background.jpg");
+  background-repeat: no-repeat;
+}
+
+#logo-image {
+  height: 200px;
+  width: 100%;
+  /* background-image: url('../src/pages/images/logo-2.png'); */
+  
+}
+
+.why-us:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.description {
+  text-align: left;
+  font-size: 36pt;
+  color: white;
+  font-weight: 750;
+  padding: 0px;
+}
+
+.company-image {
+  background-image: url('../src/pages/images/logo-2.png');
+  height: 30px;
+  width: 20px;
+  z-index: 1;
+}
+
+.caption {
+  text-align: left;
+  font-size: 12pt;
+  color: white;
+}
+
+#creating-button {
+  position: relative;
+  margin-top: 80px;
+  background-color: #1a237e;
+  color: white;
+  width: 18em;
+}
+
+#creating-about-button{
+ 
+  margin-top: 10px;
+  background-color:#1a237e;
+  color:white;
+  text-align:center;
+  margin-right: 20px;
+   width: 22em; 
+   bottom:40px;
+   background: rgba(10, 156, 144, 0.61);
+   border-radius: 8px;
+   border-color: rgba(22, 22, 22, 0.61);
+   padding: 8px;
+   max-width: 100%;
+   height: 60px;
+}
+
+#creating-button:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.home-button {
+  text-align: center;
+  background-color: #1a237e;
+  color: white;
+  width: 18em;
+  position: relative;
+}
+
+.home-button:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+=======
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
 body {
   min-height: 100%;
   background-position: center;
@@ -148,6 +468,170 @@ body {
     #7f7fd5
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+<<<<<<< HEAD
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+ .parallax-one{
+  
+  height:619px;
+ 
+ }
+
+ .parallax-home{
+   height: 665px;
+ }
+
+ .parallax-two{
+  
+  height:419px;
+ }
+
+ .section-white{
+   text-align:center;
+   background: -webkit-linear-gradient(
+    to right,
+    #91eae4,
+    #86a8e7,
+    #7f7fd5
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #91eae4,
+    #86a8e7,
+    #7f7fd5
+  );
+ }
+
+.website-one{
+  background-image: url(../src/pages/images/example_site_one.jpg);
+  background-repeat: no-repeat;
+  /* height: 400px;
+  width:200px;
+  background-repeat:no-repeat;
+  background-position-x: 10%; 
+  position: relative;
+  right:10px;
+  z-index:1; */
+}
+
+.website-two{
+  background-image: url(../src/pages/images/example_site_one.jpg);
+  height: 400px;
+  width:200px;
+  background-repeat:no-repeat;
+  /* background-position-x: 60%; */
+  position: relative;
+  right:20px;
+  z-index:1;
+}
+
+  .website-wrapper{ 
+ width:100%; 
+position: relative;
+top: 300px;
+/* right: 75px; */
+}  
+  
+
+  body{
+    min-height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-image: url("pages/images/background.jpg"); */
+    background: #7F7FD5;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  
+  }
+
+  @media screen and (max-width:1224px) {
+    
+      .bg{
+        width: 100%;
+      }
+    }
+  @media screen and (max-width: 980px) {
+
+    .bg{
+      width: 980px;
+    }
+
+  }
+
+  @media screen and (max-width:940px) {
+
+    .bg{
+      width: 100%;
+    }
+  }
+  
+  @media screen and (max-width:768px) {
+   
+    .bg{
+      width: 768px;
+    }
+
+    #home-description{
+      width: 60%;
+      margin-right: 30px;
+    }
+
+  }
+
+  @media screen and (max-width:640px) {
+
+    .bg{
+      width:640px;
+    }
+    #home-description{
+    width: 60%;
+      margin-right: 30px;
+  }
+}
+
+  @media screen and (max-width:590px) {
+
+    .bg{
+      width: 720px;
+    }
+    #home-description{
+      width: 60%;
+        margin-right: 30px;
+    }
+  }
+
+  @media screen and (max-width:520px) {
+
+    .bg{
+      width: 600px;
+    }
+    #home-description{
+      width: 40%;
+        margin-right: 60px;
+    }
+  }
+
+  @media screen and (max-width:480px) {
+    .bg{
+      width: 600px;
+    }
+    #home-description{
+      width: 60%;
+        margin-right: 80px;
+    }
+  }
+=======
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
 
 @keyframes App-logo-spin {
   from {

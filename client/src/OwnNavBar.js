@@ -9,6 +9,9 @@ class OwnNavBar extends Component {
       <Fragment>
         <Navbar
           brand="Burner Pages"
+          style={{
+            fontFamily:"Brush Script MT",
+          }}
           email={this.props.email}
           className="indigo darken-4"
           right
@@ -19,27 +22,40 @@ class OwnNavBar extends Component {
             </Link>
           </NavItem> */}
           <NavItem onClick={() => console.log('test click')}>
-            <Link to="/" className="navlink">
+            <Link to="/" className="navlink" id="navLink">
               Home
             </Link>
           </NavItem>
           <NavItem>
-            <Link to="/about" className="navlink">
+            <Link to="/about" className="navlink" id="navLink">
               About
             </Link>
           </NavItem>
+<<<<<<< HEAD
+          <NavItem>
+            <Link to="/signup" className="navlink" id="navLink">
+=======
           {/* <NavItem>
             <Link to="/signup" className="navlink">
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
               Sign Up
             </Link>
           </NavItem> */}
           <NavItem>
+<<<<<<< HEAD
+            <Link to="/login" className="navlink" id="navLink">
+=======
             <Link to="/auth/google" className="navlink">
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
               Login
             </Link>
           </NavItem>
           <NavItem>
+<<<<<<< HEAD
+            <Link to="/create" className="navlink" id="navLink">
+=======
             <Link to="/construction" className="navlink">
+>>>>>>> 783b4b6a6ecb54fe1611dce67cb09d01cf4136a8
               Create
             </Link>
           </NavItem>
