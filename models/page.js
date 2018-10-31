@@ -7,6 +7,9 @@ var Schema = mongoose.Schema;
 var PageSchema = new Schema({
   author: {
     type: Array
+  },
+  profileId: {
+    type: String
   }
 });
 
