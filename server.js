@@ -49,12 +49,12 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-console.log({
-  functionName: 'passport use inputs in server.js',
-  clientID: process.env.clientID,
-  clientSecret: process.env.clientSecret,
-  callbackURL: process.env.callbackURL
-});
+// console.log({
+//   functionName: 'passport use inputs in server.js',
+//   clientID: process.env.clientID,
+//   clientSecret: process.env.clientSecret,
+//   callbackURL: process.env.callbackURL
+// });
 passport.use(
   new GoogleStrategy(
     {
@@ -63,7 +63,7 @@ passport.use(
       callbackURL: process.env.callbackURL
     },
     function(accessToken, refreshToken, data, cb) {
-      console.log(data.emails[0].value);
+      // console.log(data.emails[0].value);
       var email = data.emails[0].value;
       var profilePic = data.photos[0].value;
       var profileId = data.id;
@@ -96,18 +96,9 @@ passport.use(
           }
         })
         .catch(err => {
-          console.log(err);
+          // console.log(err);
           return cb(err, null);
         });
-      // User.create({
-      //   profileId: profileId,
-      //   email: email
-      // }).then( user => {
-      //   return cb(null, user);
-      // }).catch( err => {
-      //   console.log(err);
-      //   return cb(err, null);
-      // });
     }
   )
 );
@@ -118,69 +109,67 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Define API routes here
-app.get('/michigan', (req, res) => {
-  res.json({
-    test: 'uh Kristine'
-  });
+
+// Route for retrieving all Pages from the user
+app.get('/api/email', function(req, res) {
+  // Find all Pages
+  let user = req.user;
+    let id = user.profileId;
+    let testData = {
+      author: req.body,
+      profileId: id
+    };
+  Page.find({profileId: id})
+    .then(function(dbPage) {
+      res.json(dbPage);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+});
+//Route for retrieving all Pages in the db
+app.get('/api/allPages', function(req, res) {
+  // Find all Pages
+  Page.find({})
+    .then(function(dbPage) {
+      res.json(dbPage);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
 });
 
-app.get('/testdb', (req, res) => {
-  User.create({
-    profileId: '1',
-    email: 'test@c.com'
-  }).then(data => {
-    console.log(data);
-    res.json(data);
-  });
+// Route for retrieving all Users from the db
+app.get('/api/user', function(req, res) {
+  User.find({})
+    .then(function(dbUser) {
+      res.json(dbUser);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
 });
-//change to post later
-app.get('/submitsomething', (req, res) => {
-  console.log(req.user);
+
+// Route for saving a new Page to the db and associating it with a User
+app.post('/submitsomething', function(req, res) {
   if (req.isAuthenticated()) {
     let user = req.user;
-    console.log(user);
-
     let id = user.profileId;
-    // let testData = req.body;
     let testData = {
-      author:
-        'https://vignette.wikia.nocookie.net/starwars/images/2/2e/Porg.png/revision/latest?cb=20171216234506'
+      author: req.body,
+      profileId: id
     };
+    // console.log(JSON.stringify(req.body));
     Page.create(testData)
-      .then(function(dbPages) {
-        console.log({
-          routerSubfunction: 'create page',
-          dbPages: dbPages,
-          profileId: id
-        });
-
-        User.findOne({ profileId: id }).then(user => {
-          console.log({
-            routerSubfunction: 'create page findOne',
-            dbPages: dbPages,
-            profileId: id,
-            user: user
-          });
-        });
-        // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
-        // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
-        // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-        User.findOneAndUpdate(
-          { profileId: id },
-          { $push: { pages: dbPages.author } },
+      .then(function(dbPage) {
+        return db.User.findOneAndUpdate(
+          {},
+          { $push: { pages: dbPage.author } },
           { new: true }
-        ).then(user => {
-          console.log({
-            routerSubfunction: 'create page findOneAndUpdate',
-            dbPages: dbPages.author,
-            profileId: id,
-            user: user
-          });
-        });
+        );
       })
-      .then(function(User) {
-        // If the Library was updated successfully, send it back to the client
-        res.json(User);
+      .then(function(dbUser) {
+        res.json(dbUser);
         res.redirect('/api/email');
       })
       .catch(function(err) {
@@ -194,39 +183,22 @@ app.get('/submitsomething', (req, res) => {
   }
 });
 
-// db.User.create({ name: "Butts" })
-//   .then(function(User) {
-//     // If saved successfully, print the new Library document to the console
-//     console.log(User);
-//   })
-//   .catch(function(err) {
-//     // If an error occurs, print it to the console
-//     console.log(err.message);
-//   });
-
-// Routes
-
-// POST route for saving a new Book to the db and associating it with a Library
-// app.post("/submit", function(req, res) {
-//   // Create a new Book in the database
-//   Page.create(req.body)
-//     .then(function(dbPages) {
-//       // If a Book was created successfully, find one library (there's only one) and push the new Book's _id to the Library's `books` array
-//       // { new: true } tells the query that we want it to return the updated Library -- it returns the original by default
-//       // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
-//       return User.findOneAndUpdate({}, { $push: { pages: "hmm"} }, { new: true });
-//     })
-//     .then(function(User) {
-//       // If the Library was updated successfully, send it back to the client
-//       res.json(User);
-//     })
-//     .catch(function(err) {
-//       // If an error occurs, send it back to the client
-//       res.json(err);
-//     });
-// });
-
 require('./routes/api-routes')(app, passport, User);
+
+app.get('/populateduser', function(req, res) {
+  // Using our User model, "find" every user in our db and populate them with any associated books
+  User.find({})
+    // Specify that we want to populate the retrieved users with any associated pages
+    .populate('pages')
+    .then(function(dbUser) {
+      // If any Users are found, send them to the client with any associated Pages
+      res.json(dbUser);
+    })
+    .catch(function(err) {
+      // If an error occurs, send it back to the client
+      res.json(err);
+    });
+});
 
 // Send every other request to the React app
 // Define any API routes before this runs
