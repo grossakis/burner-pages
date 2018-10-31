@@ -110,8 +110,25 @@ if (process.env.NODE_ENV === 'production') {
 
 // Define API routes here
 
-// Route for retrieving all Pages from the db
+// Route for retrieving all Pages from the user
 app.get('/api/email', function(req, res) {
+  // Find all Pages
+  let user = req.user;
+    let id = user.profileId;
+    let testData = {
+      author: req.body,
+      profileId: id
+    };
+  Page.find({profileId: id})
+    .then(function(dbPage) {
+      res.json(dbPage);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+});
+//Route for retrieving all Pages in the db
+app.get('/api/allPages', function(req, res) {
   // Find all Pages
   Page.find({})
     .then(function(dbPage) {
@@ -139,9 +156,10 @@ app.post('/submitsomething', function(req, res) {
     let user = req.user;
     let id = user.profileId;
     let testData = {
-      author: req.body
+      author: req.body,
+      profileId: id
     };
-    console.log(JSON.stringify(req.body));
+    // console.log(JSON.stringify(req.body));
     Page.create(testData)
       .then(function(dbPage) {
         return db.User.findOneAndUpdate(
