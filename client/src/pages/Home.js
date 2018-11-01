@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import "../App.css";
 import {
@@ -8,6 +9,7 @@ import {
   Container,
   Parallax
 } from "react-materialize";
+
 import { Link } from "react-router-dom";
 
 class Home extends Component {
@@ -18,6 +20,7 @@ class Home extends Component {
 
   render() {
     return (
+
       <div className="bg">
         <div id="logo" />
         
@@ -37,6 +40,7 @@ class Home extends Component {
               </div>
             </a>
             </Row>
+
           </Link>
 
           {/* <Link to="/about" style={{ color: 'white' }}> */}

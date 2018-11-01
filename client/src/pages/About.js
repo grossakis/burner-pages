@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import { Col, Row, Button, Container, Carousel, Parallax } from 'react-materialize';
 import '../App.css';
@@ -6,7 +7,7 @@ import { Link } from 'react-router-dom';
 class About extends Component {
   handleScroll = event => {
     event.preventDefault();
-    console.log('scroll');
+    console.log("scroll");
   };
 
   render() {
@@ -24,8 +25,8 @@ class About extends Component {
         //   s={12}
           className="center"
           style={{
-            color: 'white',
-            fontFamily: 'Verdana'
+            color: "white",
+            fontFamily: "Verdana"
           }}
           />
           
@@ -54,6 +55,7 @@ class About extends Component {
         
 
         <Row className="center">
+
           <Link to="/construction" style={{ color: 'white' }}>
             <Button id="creating-about-button">Start Creating </Button>
             

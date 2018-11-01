@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-image: url('pages/images/background-pattern.jpg');
+  background-image: url("pages/images/background-pattern.jpg");
 }
 
 .App-logo {
@@ -13,7 +13,7 @@
 }
 
 #logo {
-  background-image: url('../src/pages/images/airplane-logo.png');
+  background-image: url("../src/pages/images/airplane-logo.png");
   z-index: 1;
   background-repeat: no-repeat;
   background-position-y: 5%;
@@ -49,7 +49,7 @@ html {
   margin-top: 20px;
   color: #164e87;
   font-size: 12pt;
-  font-family: 'Courier New';
+  font-family: "Courier New";
   font-weight: bold;
 }
 
@@ -74,7 +74,7 @@ html {
 #logo-image {
   height: 200px;
   width: 150px;
-  background-image: url('../src/pages/images/logo-2.png');
+  background-image: url("../src/pages/images/logo-2.png");
 }
 
 .why-us:hover {
@@ -92,7 +92,7 @@ html {
 }
 
 .company-image {
-  background-image: url('../src/pages/images/logo-2.png');
+  background-image: url("../src/pages/images/logo-2.png");
   height: 30px;
   width: 20px;
   z-index: 1;

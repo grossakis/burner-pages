@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
 // import './Custom.css';
-import { Navbar, NavItem } from 'react-materialize';
+import { Navbar, NavItem } from "react-materialize";
 
 
 
@@ -11,7 +11,9 @@ class OwnNavBar extends Component {
     return (
       <Fragment>
         <Navbar
+
           brand="BP" className = "brand" style = {{fontFamily: 'brush script mt', paddingLeft: '20px'}}
+
           email={this.props.email}
           className="indigo darken-4"
           right
@@ -21,13 +23,17 @@ class OwnNavBar extends Component {
               Google
             </Link>
           </NavItem> */}
+
           <NavItem onClick={() => console.log('test click')}>
             <Link to="/" className="navlink" style = {{fontFamily: 'Arial, sans-serif', fontSize: '12pt'}}>
+
               Home
             </Link>
           </NavItem>
           <NavItem>
+
             <Link to="/about" className="navlink" style = {{fontFamily: 'Arial, sans-serif', fontSize: '12pt'}}>
+
               About
             </Link>
           </NavItem>
@@ -36,6 +42,7 @@ class OwnNavBar extends Component {
               Sign Up
             </Link>
           </NavItem> */}
+
           {/* <NavItem>
             <Link to="/auth/google" className="navlink" style = {{fontFamily: 'Arial, sans-serif', fontSize: '14pt'}}>
               Login
@@ -43,6 +50,7 @@ class OwnNavBar extends Component {
           </NavItem> */}
          
            
+
           <NavItem>
             <Link to="/pages" className="navlink" style = {{fontFamily: 'Arial, sans-serif', fontSize: '12pt'}}>
               Dashboard
