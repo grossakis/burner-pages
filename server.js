@@ -1,25 +1,25 @@
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const expressSession = require('express-session');
-const passport = require('passport');
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const expressSession = require("express-session");
+const passport = require("passport");
 const PORT = process.env.PORT || 3001;
 const app = express();
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 // const Example = require("./exampleModel.js");
-const User = require('./models/User');
-const Page = require('./models/Page');
-const db = require('./models');
-const env = require('dotenv').config();
+const User = require("./models/User");
+const Page = require("./models/Page");
+const db = require("./models");
+const env = require("dotenv").config();
 
 // const passportGoogleAuth = require('passport-google-oauth20');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 //remember that this is your connection string.
 //we will change this later
 if (
-  typeof process.env.MONGODB_URI !== 'undefined' &&
+  typeof process.env.MONGODB_URI !== "undefined" &&
   process.env.MONGODB_URI.length > 0
 ) {
   mongoose.connect(
@@ -28,7 +28,7 @@ if (
   );
 } else {
   mongoose.connect(
-    'mongodb://localhost/testmern3',
+    "mongodb://localhost/testmern3",
     { useNewUrlParser: true }
   );
 }
@@ -40,7 +40,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   expressSession({
-    secret: '12346 xyz i dont know it could be anything tomato',
+    secret: "12346 xyz i dont know it could be anything tomato",
     resave: true,
     saveUninitialized: true,
     secure: false
@@ -104,22 +104,46 @@ passport.use(
 );
 
 // Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/public'));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/public"));
 }
 
 // Define API routes here
 
+// app.get("/hostroute", (req, res) => {
+//   console.log(mongoose.connection.host);
+//   console.log(Page.db.name);
+//   console.log(Page.db.host);
+// });
+app.get("/api/page/:userId/:pageName/:randomNuber", (req, res) => {
+  Page.find({
+    profileId: req.params.userId,
+    "author.name": req.params.pageName
+  })
+    .then(data => {
+      console.log(data);
+      console.log(data[0].author[0].rows);
+      res.json({
+        rows: data[0].author[0].rows,
+        backgroundColor: data[0].author[0].backgroundColor
+      });
+    })
+    .catch(err => {
+      res.json(err);
+    });
+  // res.json({ rows: [] });
+});
+
 // Route for retrieving all Pages from the user
-app.get('/api/email', function(req, res) {
+app.get("/api/email", function(req, res) {
   // Find all Pages
   let user = req.user;
-    let id = user.profileId;
-    let testData = {
-      author: req.body,
-      profileId: id
-    };
-  Page.find({profileId: id})
+  let id = user.profileId;
+  let testData = {
+    author: req.body,
+    profileId: id
+  };
+  Page.find({ profileId: id })
     .then(function(dbPage) {
       res.json(dbPage);
     })
@@ -128,7 +152,7 @@ app.get('/api/email', function(req, res) {
     });
 });
 //Route for retrieving all Pages in the db
-app.get('/api/allPages', function(req, res) {
+app.get("/api/allPages", function(req, res) {
   // Find all Pages
   Page.find({})
     .then(function(dbPage) {
@@ -140,7 +164,7 @@ app.get('/api/allPages', function(req, res) {
 });
 
 // Route for retrieving all Users from the db
-app.get('/api/user', function(req, res) {
+app.get("/api/user", function(req, res) {
   User.find({})
     .then(function(dbUser) {
       res.json(dbUser);
@@ -151,7 +175,7 @@ app.get('/api/user', function(req, res) {
 });
 
 // Route for saving a new Page to the db and associating it with a User
-app.post('/submitsomething', function(req, res) {
+app.post("/submitsomething", function(req, res) {
   if (req.isAuthenticated()) {
     let user = req.user;
     let id = user.profileId;
@@ -170,7 +194,7 @@ app.post('/submitsomething', function(req, res) {
       })
       .then(function(dbUser) {
         res.json(dbUser);
-        res.redirect('/api/email');
+        res.redirect("/api/email");
       })
       .catch(function(err) {
         // If an error occurs, send it back to the client
@@ -178,18 +202,18 @@ app.post('/submitsomething', function(req, res) {
       });
   } else {
     res.json({
-      error: 'You are not logged in'
+      error: "You are not logged in"
     });
   }
 });
 
-require('./routes/api-routes')(app, passport, User);
+require("./routes/api-routes")(app, passport, User);
 
-app.get('/populateduser', function(req, res) {
+app.get("/populateduser", function(req, res) {
   // Using our User model, "find" every user in our db and populate them with any associated books
   User.find({})
     // Specify that we want to populate the retrieved users with any associated pages
-    .populate('pages')
+    .populate("pages")
     .then(function(dbUser) {
       // If any Users are found, send them to the client with any associated Pages
       res.json(dbUser);
@@ -202,8 +226,8 @@ app.get('/populateduser', function(req, res) {
 
 // Send every other request to the React app
 // Define any API routes before this runs
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './client/public/index.html'));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/public/index.html"));
 });
 
 app.listen(PORT, () => {

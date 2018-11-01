@@ -26,7 +26,11 @@ class PageConstructor extends Component {
     editDisplay: "none",
     rowWidth: 0,
     selectedFile: "",
-    pageBGcolor: "#FFFFFF"
+    // pageBGcolor: "#FFFFFF",
+    pageInfo: {
+      pageName: "",
+      pageBGcolor: "#FFFFFF"
+    }
   };
 
   addRow = () => {
@@ -64,8 +68,10 @@ class PageConstructor extends Component {
   };
 
   pageBGhandleChangeComplete = color => {
+    let pageInfo = this.state.pageInfo;
+    pageInfo.pageBGcolor = color.hex;
     this.setState({
-      pageBGcolor: color.hex
+      pageInfo: pageInfo
     });
   };
 
@@ -445,12 +451,25 @@ class PageConstructor extends Component {
     );
   };
 
+  pageNameHandler = event => {
+    let pageInfo = this.state.pageInfo;
+    pageInfo.pageName = event.target.value;
+    this.setState({
+      pageInfo: pageInfo
+    });
+  };
+
   savePageHandler = event => {
     event.preventDefault();
+    let page = {
+      name: this.state.pageInfo.pageName.replace(/ /g, "_"),
+      backgroundColor: this.state.pageInfo.pageBGcolor,
+      rows: this.state.rows
+    };
     console.log(this.state.rows);
     // let pages;
     axios
-      .post("/submitsomething", this.state.rows)
+      .post("/submitsomething", page)
       .then(res => {
         console.log(res);
       })
@@ -671,6 +690,7 @@ class PageConstructor extends Component {
         </Row>
 
         {console.log(this.state.rows)}
+        {console.log(this.state.pageInfo.pageName.replace(/ /g, "_"))}
 
         <EditingContainer
           display={this.state.editDisplay}
@@ -705,7 +725,7 @@ class PageConstructor extends Component {
             position: "fixed",
             bottom: 0,
             left: 0,
-            height: "130px",
+            height: "150px",
             width: "70%",
             padding: "20px",
             backgroundColor: "rgb(240, 240, 240, 0.75)",
@@ -715,17 +735,18 @@ class PageConstructor extends Component {
           }}
         >
           <Row>
-            <Col s={6}>
+            <Col s={8}>
+              <span>Page Background Color</span>
               <SliderPicker
                 // disableAlpha={true}
                 width="auto"
-                color={this.state.pageBGcolor}
+                color={this.state.pageInfo.pageBGcolor}
                 onChangeComplete={this.pageBGhandleChangeComplete}
               />
               <br />
               <CirclePicker
                 width="auto"
-                color={this.state.pageBGcolor}
+                color={this.state.pageInfo.pageBGcolor}
                 onChangeComplete={this.pageBGhandleChangeComplete}
                 colors={[
                   "#FFFFFF",
@@ -740,23 +761,28 @@ class PageConstructor extends Component {
                 ]}
               />
             </Col>
-            <Col s={6}>
-              <input
-                s={12}
-                type="textarea"
-                label="Type text here"
-                onChange={this.props.changeContent}
-                value={this.props.selectContent}
-                style={{ margin: "0 10px" }}
-              />
-
-              <button onClick={this.savePageHandler}>post</button>
+            <Col s={4}>
+              <div style={{ textAlign: "center" }}>
+                <span>Page Title: </span>
+                <input
+                  type="textarea"
+                  label="Type text here"
+                  onChange={this.pageNameHandler}
+                  value={this.state.pageInfo.pageName}
+                  style={{ margin: "0 10px" }}
+                />
+                <br />
+                <br />
+                <Button onClick={this.savePageHandler} s={6}>
+                  post
+                </Button>
+              </div>
             </Col>
           </Row>
         </div>
         <div
           style={{
-            backgroundColor: this.state.pageBGcolor,
+            backgroundColor: this.state.pageInfo.pageBGcolor,
             height: "100vh",
             width: "100vw",
             position: "fixed",
@@ -769,7 +795,7 @@ class PageConstructor extends Component {
         <div
           style={{
             height: "150px",
-            width: "100vw"
+            width: "50vw"
           }}
         />
       </Container>
