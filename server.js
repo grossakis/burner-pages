@@ -16,6 +16,7 @@ const env = require("dotenv").config();
 // const passportGoogleAuth = require('passport-google-oauth20');
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
+require("./routes/api-routes")(app, passport, User);
 //remember that this is your connection string.
 //we will change this later
 if (
@@ -206,8 +207,6 @@ app.post("/submitsomething", function(req, res) {
     });
   }
 });
-
-require("./routes/api-routes")(app, passport, User);
 
 app.get("/populateduser", function(req, res) {
   // Using our User model, "find" every user in our db and populate them with any associated books
