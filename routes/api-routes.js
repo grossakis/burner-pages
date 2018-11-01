@@ -44,11 +44,11 @@ module.exports = function(app, passport, User) {
   app.get(
     "/auth/google/callback",
     passport.authenticate("google", {
-      failureRedirect: "http://localhost:3000/"
+      failureRedirect: process.env.FAILURE_URL
     }),
     function(req, res) {
       // Successful authentication, redirect home.
-      res.redirect("http://localhost:3000/");
+      res.redirect(process.env.SUCCESSFUL_URL);
     }
   );
 
