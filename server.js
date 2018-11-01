@@ -105,7 +105,7 @@ passport.use(
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/public"));
+  app.use(express.static("client/build"));
 }
 
 // Define API routes here
@@ -173,7 +173,6 @@ app.get("/api/user", function(req, res) {
       res.json(err);
     });
 });
-
 // Route for saving a new Page to the db and associating it with a User
 app.post("/submitsomething", function(req, res) {
   if (req.isAuthenticated()) {

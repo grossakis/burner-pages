@@ -174,7 +174,7 @@ class Search extends Component {
     //   }
     // ];
     if (typeof this.state.rows === "undefined") {
-      return <Container />;
+      return <Container>page not found</Container>;
     } else {
       return (
         <Container>
