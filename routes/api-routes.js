@@ -28,13 +28,18 @@ module.exports = function(app, passport, User) {
     }
   });
 
-  app.get("/logout", function(req, res) {
-    console.log("logged out!");
-    req.logout();
-    //redirect to home page
-    // res.redirect('/');
-    res.redirect("/api/email");
-  });
+
+    app.get('/logout', function(req, res) {
+        console.log("logged out!");
+        req.logout();
+        //redirect to home page
+        res.redirect('/');
+        // res.redirect('/api/email')
+    });
+    
+    app.get('/auth/google',
+        passport.authenticate('google', { scope: ['profile', 'email'] }));
+
 
   app.get(
     "/_auth/google",

@@ -3,15 +3,17 @@ import { Link } from "react-router-dom";
 // import './Custom.css';
 import { Navbar, NavItem } from "react-materialize";
 
+
+
+
 class OwnNavBar extends Component {
   render() {
     return (
       <Fragment>
         <Navbar
-          brand="Burner Pages"
-          style={{
-            fontFamily: "Brush Script MT"
-          }}
+
+          brand="BP" className = "brand" style = {{fontFamily: 'brush script mt', paddingLeft: '20px'}}
+
           email={this.props.email}
           className="indigo darken-4"
           right
@@ -21,13 +23,17 @@ class OwnNavBar extends Component {
               Google
             </Link>
           </NavItem> */}
-          <NavItem onClick={() => console.log("test click")}>
-            <Link to="/" className="navlink" id="navLink">
+
+          <NavItem onClick={() => console.log('test click')}>
+            <Link to="/" className="navlink" style = {{fontFamily: 'Arial, sans-serif', fontSize: '12pt'}}>
+
               Home
             </Link>
           </NavItem>
           <NavItem>
-            <Link to="/about" className="navlink" id="navLink">
+
+            <Link to="/about" className="navlink" style = {{fontFamily: 'Arial, sans-serif', fontSize: '12pt'}}>
+
               About
             </Link>
           </NavItem>
@@ -36,26 +42,33 @@ class OwnNavBar extends Component {
               Sign Up
             </Link>
           </NavItem> */}
-          <NavItem>
-            <a href="/_auth/google" className="navlink">
+
+          {/* <NavItem>
+            <Link to="/auth/google" className="navlink" style = {{fontFamily: 'Arial, sans-serif', fontSize: '14pt'}}>
               Login
-            </a>
-          </NavItem>
-          <NavItem>
-            <Link to="/construction" className="navlink">
-              Create
             </Link>
-          </NavItem>
+          </NavItem> */}
+         
+           
+
           <NavItem>
-            <Link to="/logout" className="navlink">
-              Sign Out
-            </Link>
-          </NavItem>
-          <NavItem>
-            <Link to="/pages" className="navlink">
+            <Link to="/pages" className="navlink" style = {{fontFamily: 'Arial, sans-serif', fontSize: '12pt'}}>
               Dashboard
             </Link>
           </NavItem>
+
+           <NavItem>
+            <Link to="/construction" className="navlink" style = {{fontFamily: 'Arial, sans-serif', fontSize: '12pt'}}>
+              Create
+            </Link>
+          </NavItem>
+
+          <NavItem>
+            <Link to="/logout" className="navlink"  style = {{fontFamily: 'Arial, sans-serif', fontSize: '12pt'}}>
+              Sign Out
+            </Link>
+          </NavItem> 
+
         </Navbar>
       </Fragment>
     );
