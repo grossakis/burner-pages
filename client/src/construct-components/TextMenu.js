@@ -141,6 +141,7 @@ class TextMenu extends Component {
     );
     let widthSelect = () => (
       <Col s={12}>
+        <span style={{ color: "#9e9e9e", fontSize: "11px" }}>Width Select</span>
         <Select
           style={{
             width: "100%"
@@ -196,6 +197,7 @@ class TextMenu extends Component {
     );
     let fontSelect = () => (
       <Col s={12}>
+        <span style={{ color: "#9e9e9e", fontSize: "11px" }}>Font Select</span>
         <Select
           style={{
             width: "100%"

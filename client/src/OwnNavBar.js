@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
 // import './Custom.css';
-import { Navbar, NavItem } from 'react-materialize';
+import { Navbar, NavItem } from "react-materialize";
 
 class OwnNavBar extends Component {
   render() {
@@ -9,6 +9,9 @@ class OwnNavBar extends Component {
       <Fragment>
         <Navbar
           brand="Burner Pages"
+          style={{
+            fontFamily: "Brush Script MT"
+          }}
           email={this.props.email}
           className="indigo darken-4"
           right
@@ -18,13 +21,13 @@ class OwnNavBar extends Component {
               Google
             </Link>
           </NavItem> */}
-          <NavItem onClick={() => console.log('test click')}>
-            <Link to="/" className="navlink">
+          <NavItem onClick={() => console.log("test click")}>
+            <Link to="/" className="navlink" id="navLink">
               Home
             </Link>
           </NavItem>
           <NavItem>
-            <Link to="/about" className="navlink">
+            <Link to="/about" className="navlink" id="navLink">
               About
             </Link>
           </NavItem>

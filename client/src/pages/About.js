@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { Col, Row, Button, Container } from 'react-materialize';
-import '../App.css';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Col, Row, Button, Container } from "react-materialize";
+import "../App.css";
+import { Link } from "react-router-dom";
 
 class About extends Component {
   handleScroll = event => {
     event.preventDefault();
-    console.log('scroll');
+    console.log("scroll");
   };
 
   render() {
@@ -20,8 +20,8 @@ class About extends Component {
           s={12}
           className="center"
           style={{
-            color: 'white',
-            fontFamily: 'Verdana'
+            color: "white",
+            fontFamily: "Verdana"
           }}
         >
           <h4>Build Single-Page Websites For Just About Anything.</h4>
@@ -32,7 +32,7 @@ class About extends Component {
         </Col>
 
         <Row className="center">
-          <Link to="/construction" style={{ color: 'white' }}>
+          <Link to="/construction" style={{ color: "white" }}>
             <Button id="creating-button">Start Creating </Button>
           </Link>
         </Row>
