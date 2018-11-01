@@ -45,9 +45,6 @@ class Home extends Component {
             <Button id="creating-button">Start Creating </Button>
           </Link>
         </Row>
-        <Row className="center">
-          <a href="/auth/google">Login</a>
-        </Row>
       </Fragment>
     );
   }
