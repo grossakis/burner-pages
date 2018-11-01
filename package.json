@@ -2,9 +2,6 @@
   "name": "mern",
   "version": "1.0.0",
   "description": "Mern Demo",
-  "engines": {
-    "node": "8.11.1"
-  },
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -13,7 +10,7 @@
     "client": "cd client && npm run start",
     "install": "cd client && yarn install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install —prefix client && nom run build —prefix client"
+    "heroku-postbuild": "npm run build"
   },
   "author": "",
   "license": "ISC",
