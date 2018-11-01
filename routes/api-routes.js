@@ -33,8 +33,8 @@ module.exports = function(app, passport, User){
         console.log("logged out!");
         req.logout();
         //redirect to home page
-        // res.redirect('/');
-        res.redirect('/api/email')
+        res.redirect('/');
+        // res.redirect('/api/email')
     });
     
     app.get('/auth/google',

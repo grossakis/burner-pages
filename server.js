@@ -149,7 +149,6 @@ app.get('/api/user', function(req, res) {
       res.json(err);
     });
 });
-
 // Route for saving a new Page to the db and associating it with a User
 app.post('/submitsomething', function(req, res) {
   if (req.isAuthenticated()) {
