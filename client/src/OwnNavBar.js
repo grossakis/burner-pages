@@ -37,7 +37,7 @@ class OwnNavBar extends Component {
             </Link>
           </NavItem> */}
           <NavItem>
-            <a href="/auth/google" className="navlink">
+            <a href="/_auth/google" className="navlink">
               Login
             </a>
           </NavItem>
