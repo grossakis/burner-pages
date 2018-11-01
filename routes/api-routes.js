@@ -37,12 +37,12 @@ module.exports = function(app, passport, User) {
   });
 
   app.get(
-    "/auth/google",
+    "/_auth/google",
     passport.authenticate("google", { scope: ["profile", "email"] })
   );
 
   app.get(
-    "/auth/google/callback",
+    "/_auth/google/callback",
     passport.authenticate("google", {
       failureRedirect: process.env.FAILURE_URL
     }),
