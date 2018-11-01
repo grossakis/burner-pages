@@ -410,6 +410,8 @@ class PageConstructor extends Component {
   };
 
   fileUploadHandler = () => {
+    // const CLOUDINARY_URL = process.env.CLOUDINARY_URL;
+    // const CLOUDINARY_UPLOAD_PRESET = process.env.CLOUDINARY_UPLOAD_PRESET;
     const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dtergnssx/upload";
     const CLOUDINARY_UPLOAD_PRESET = "xxsgqoid";
 
@@ -468,14 +470,19 @@ class PageConstructor extends Component {
     };
     console.log(this.state.rows);
     // let pages;
-    axios
-      .post("/submitsomething", page)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    if (page.name === "") {
+      alert("You must enter a title for your page");
+    } else {
+      axios
+        .post("/submitsomething", page)
+        .then(res => {
+          console.log(res);
+          window.location.href = "/pages";
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
   };
 
   render() {

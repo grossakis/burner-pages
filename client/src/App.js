@@ -47,7 +47,7 @@ class App extends Component {
             <Route exact path="/construction" component={PageConstructor} />
             <Route exact path="/pages" component={Dashboard} />
             {/* <Route exact path="/:user" component={Userpage} /> */}
-            <Route exact path="/user/:userID/:pageName" component={Userpage} />
+            <Route exact path="/:userID/:pageName" component={Userpage} />
             {/* <Route component={Error} /> */}
           </Switch>
         </Fragment>
