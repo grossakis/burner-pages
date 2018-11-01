@@ -8,8 +8,8 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const mongoose = require("mongoose");
 // const Example = require("./exampleModel.js");
-const User = require("./models/User");
-const Page = require("./models/Page");
+const User = require("./models/user");
+const Page = require("./models/page");
 const db = require("./models");
 const env = require("dotenv").config();
 
