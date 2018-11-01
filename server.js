@@ -110,6 +110,30 @@ if (process.env.NODE_ENV === "production") {
 
 // Define API routes here
 
+// app.get("/hostroute", (req, res) => {
+//   console.log(mongoose.connection.host);
+//   console.log(Page.db.name);
+//   console.log(Page.db.host);
+// });
+app.get("/api/page/:userId/:pageName/:randomNuber", (req, res) => {
+  Page.find({
+    profileId: req.params.userId,
+    "author.name": req.params.pageName
+  })
+    .then(data => {
+      console.log(data);
+      console.log(data[0].author[0].rows);
+      res.json({
+        rows: data[0].author[0].rows,
+        backgroundColor: data[0].author[0].backgroundColor
+      });
+    })
+    .catch(err => {
+      res.json(err);
+    });
+  // res.json({ rows: [] });
+});
+
 // Route for retrieving all Pages from the user
 app.get("/api/email", function(req, res) {
   // Find all Pages

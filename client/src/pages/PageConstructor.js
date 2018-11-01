@@ -26,7 +26,11 @@ class PageConstructor extends Component {
     editDisplay: "none",
     rowWidth: 0,
     selectedFile: "",
-    pageBGcolor: "#FFFFFF"
+    // pageBGcolor: "#FFFFFF",
+    pageInfo: {
+      pageName: "",
+      pageBGcolor: "#FFFFFF"
+    }
   };
 
   addRow = () => {
@@ -64,8 +68,10 @@ class PageConstructor extends Component {
   };
 
   pageBGhandleChangeComplete = color => {
+    let pageInfo = this.state.pageInfo;
+    pageInfo.pageBGcolor = color.hex;
     this.setState({
-      pageBGcolor: color.hex
+      pageInfo: pageInfo
     });
   };
 
@@ -445,12 +451,25 @@ class PageConstructor extends Component {
     );
   };
 
+  pageNameHandler = event => {
+    let pageInfo = this.state.pageInfo;
+    pageInfo.pageName = event.target.value;
+    this.setState({
+      pageInfo: pageInfo
+    });
+  };
+
   savePageHandler = event => {
     event.preventDefault();
+    let page = {
+      name: this.state.pageInfo.pageName.replace(/ /g, "_"),
+      backgroundColor: this.state.pageInfo.pageBGcolor,
+      rows: this.state.rows
+    };
     console.log(this.state.rows);
     // let pages;
     axios
-      .post("/submitsomething", this.state.rows)
+      .post("/submitsomething", page)
       .then(res => {
         console.log(res);
       })
@@ -671,6 +690,7 @@ class PageConstructor extends Component {
         </Row>
 
         {console.log(this.state.rows)}
+        {console.log(this.state.pageInfo.pageName.replace(/ /g, "_"))}
 
         <EditingContainer
           display={this.state.editDisplay}
@@ -720,13 +740,13 @@ class PageConstructor extends Component {
               <SliderPicker
                 // disableAlpha={true}
                 width="auto"
-                color={this.state.pageBGcolor}
+                color={this.state.pageInfo.pageBGcolor}
                 onChangeComplete={this.pageBGhandleChangeComplete}
               />
               <br />
               <CirclePicker
                 width="auto"
-                color={this.state.pageBGcolor}
+                color={this.state.pageInfo.pageBGcolor}
                 onChangeComplete={this.pageBGhandleChangeComplete}
                 colors={[
                   "#FFFFFF",
@@ -747,8 +767,8 @@ class PageConstructor extends Component {
                 <input
                   type="textarea"
                   label="Type text here"
-                  onChange={this.props.changeContent}
-                  value={this.props.selectContent}
+                  onChange={this.pageNameHandler}
+                  value={this.state.pageInfo.pageName}
                   style={{ margin: "0 10px" }}
                 />
                 <br />
@@ -762,7 +782,7 @@ class PageConstructor extends Component {
         </div>
         <div
           style={{
-            backgroundColor: this.state.pageBGcolor,
+            backgroundColor: this.state.pageInfo.pageBGcolor,
             height: "100vh",
             width: "100vw",
             position: "fixed",
