@@ -8,6 +8,10 @@
   height: 80px;
 }
 
+.brand{
+ color: black;
+}
+
 #logo {
   background-image: url('../src/pages/images/airplane-logo.png');
   z-index: 1;
@@ -384,7 +388,7 @@ height: 100%;
 
 #home-description{
   z-index:1;
-  margin-left: 33vw;
+  margin-left: 34.5vw;
   position: relative;
   margin-top: 0vh;
   font-family: 'Brush Script MT', Brush Script Std, cursive;
@@ -392,9 +396,53 @@ height: 100%;
   color: #e1e8f0;
   font-size: 3.5em;           
   
-  
-  
 } 
+
+#customBtn {
+  display: inline-block;
+  background-color: #4285f4;
+  color: #fff;
+  width: 190px;
+  /* border-radius: 5px; */
+  border: thin solid #4285f4;
+  /* box-shadow: 1px 1px 1px #4285f4; */
+  white-space: nowrap;
+  position: relative;
+  left: 17%;
+  margin-left: 26.5vw;
+  
+}
+#customBtn:hover {
+  cursor: pointer;
+}
+span.label {
+  font-family: serif;
+  font-weight: normal;
+}
+span.icon {
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/25px-Google_%22G%22_Logo.svg.png') transparent 5px 50%  no-repeat;
+  background-color: whitesmoke;
+  display: inline-block;
+  vertical-align: middle;
+  background-position-x: 50%;
+  width: 42px;
+  height: 42px;
+}
+span.buttonText {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  right: 20%;
+  padding-left: 42px;
+  padding-right: 42px;
+  font-size: 14px;
+  font-weight: bold;
+
+  /* Use the Roboto font that is loaded in the <head> */
+  font-family: 'Roboto', sans-serif;
+  /* background-color: blue;
+  color: whitesmoke; */
+}
 
 .bg{
   background-image: url('pages/images/bg-typing.jpg');
@@ -724,6 +772,7 @@ background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+
       .bg{
         width: 100%;
       }
+      
     }
   @media screen and (max-width: 980px) {
 
@@ -738,6 +787,12 @@ background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+
     .bg{
       width: 100%;
     }
+    #home-description{
+      width: 60%;
+      margin-right: 36vw;
+      color: whitesmoke;
+      font-size: 30pt;
+    }
   }
   
   @media screen and (max-width:768px) {
@@ -748,11 +803,15 @@ background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+
 
     #home-description{
       width: 60%;
-      margin-right: 30px;
-      color: whitesmoke
+      margin-right: 36vw;
+      color: whitesmoke;
+      font-size: 30pt;
     }
+    
 
   }
+
+ 
 
   @media screen and (max-width:640px) {
 
@@ -763,6 +822,9 @@ background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+
     width: 60%;
       margin-right: 30px;
   }
+  #customBtn{
+    margin-right: 80px;
+  }
 }
 
   @media screen and (max-width:590px) {
@@ -770,10 +832,11 @@ background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+
     .bg{
       width: 720px;
     }
-    #home-description{
+    
+    /* #home-description{
       width: 60%;
-        margin-right: 30px;
-    }
+        margin-right: 60vw;
+    } */
   }
 
   @media screen and (max-width:520px) {
@@ -781,13 +844,19 @@ background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+
     .bg{
       width: 600px;
     }
-    #home-description{
+    /* #home-description{
       width: 40%;
-        margin-right: 60px;
+        margin-right: 120px;
+    } */
+
+    #logo{
+      margin-right: 50vw;
     }
+
+   
   }
 
-  @media screen and (max-width:480px) {
+  /* @media screen and (max-width:480px) {
     .bg{
       width: 600px;
     }
@@ -795,6 +864,29 @@ background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); /* W3C, IE 10+
       width: 60%;
         margin-right: 80px;
     }
+  } */
+
+  @media screen and (max-width:340px) {
+
+    .bg{
+      width:640px;
+    }
+    #home-description{
+    width: 60%;
+      margin-right: 120vw;
+  }
+
+  #customBtn{
+    margin-right: 80px;
+  }
+
+  #logo{
+    margin-right: 25vw;
+  }
+
+ 
+  
+
   }
 
 @keyframes App-logo-spin {
